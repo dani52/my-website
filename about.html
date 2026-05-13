@@ -61,6 +61,7 @@
                     </div>
                 </div>
                 <h1 id="authorName" class="font-display text-4xl font-bold mb-4">你的名字</h1>
+                <p id="authorTitle" class="text-xl text-blue-400 mb-2"></p>
                 <p id="authorBio" class="text-xl text-gray-400 max-w-2xl mx-auto">全栈开发者，热爱技术和设计</p>
             </div>
 
@@ -75,55 +76,30 @@
                 </div>
                 <div>
                     <h2 class="font-display text-2xl font-bold mb-6">技能</h2>
-                    <div class="space-y-4">
-                        <div>
-                            <div class="flex justify-between mb-1"><span class="text-gray-300">JavaScript / TypeScript</span><span class="text-gray-500">95%</span></div>
-                            <div class="h-2 bg-dark-700 rounded-full"><div class="h-full bg-gradient-to-r from-blue-500 to-purple-500 rounded-full" style="width: 95%"></div></div>
-                        </div>
-                        <div>
-                            <div class="flex justify-between mb-1"><span class="text-gray-300">React / Vue</span><span class="text-gray-500">90%</span></div>
-                            <div class="h-2 bg-dark-700 rounded-full"><div class="h-full bg-gradient-to-r from-blue-500 to-purple-500 rounded-full" style="width: 90%"></div></div>
-                        </div>
-                        <div>
-                            <div class="flex justify-between mb-1"><span class="text-gray-300">Node.js</span><span class="text-gray-500">85%</span></div>
-                            <div class="h-2 bg-dark-700 rounded-full"><div class="h-full bg-gradient-to-r from-blue-500 to-purple-500 rounded-full" style="width: 85%"></div></div>
-                        </div>
-                        <div>
-                            <div class="flex justify-between mb-1"><span class="text-gray-300">Python</span><span class="text-gray-500">80%</span></div>
-                            <div class="h-2 bg-dark-700 rounded-full"><div class="h-full bg-gradient-to-r from-blue-500 to-purple-500 rounded-full" style="width: 80%"></div></div>
-                        </div>
+                    <div id="skillsContainer" class="space-y-4">
+                        <!-- 技能将通过 JS 动态生成 -->
                     </div>
                 </div>
             </div>
 
-            <div class="mb-16">
+            <div id="experienceSection" class="mb-16" style="display: none;">
                 <h2 class="font-display text-2xl font-bold mb-8">工作经历</h2>
-                <div class="space-y-8">
-                    <div class="timeline-item">
-                        <h3 class="text-lg font-semibold text-white">高级前端工程师</h3>
-                        <p class="text-blue-400 mb-2">某科技公司 · 2022 - 至今</p>
-                        <p class="text-gray-400">负责公司核心产品的前端架构设计和开发，带领团队完成多个重要项目。</p>
-                    </div>
-                    <div class="timeline-item">
-                        <h3 class="text-lg font-semibold text-white">全栈开发工程师</h3>
-                        <p class="text-blue-400 mb-2">某互联网公司 · 2019 - 2022</p>
-                        <p class="text-gray-400">参与多个 Web 应用的全栈开发，包括前端界面、后端 API 和数据库设计。</p>
-                    </div>
-                    <div class="timeline-item">
-                        <h3 class="text-lg font-semibold text-white">初级开发工程师</h3>
-                        <p class="text-blue-400 mb-2">某创业公司 · 2017 - 2019</p>
-                        <p class="text-gray-400">负责网站开发和维护，学习并掌握了多种前端技术。</p>
-                    </div>
+                <div id="experienceContainer" class="space-y-8">
+                    <!-- 工作经历将通过 JS 动态生成 -->
+                </div>
+            </div>
+
+            <div id="educationSection" class="mb-16" style="display: none;">
+                <h2 class="font-display text-2xl font-bold mb-8">教育经历</h2>
+                <div id="educationContainer" class="space-y-8">
+                    <!-- 教育经历将通过 JS 动态生成 -->
                 </div>
             </div>
 
             <div class="text-center">
                 <h2 class="font-display text-2xl font-bold mb-6">联系我</h2>
-                <div class="flex justify-center gap-6">
-                    <a id="githubLink" href="#" target="_blank" class="w-12 h-12 bg-dark-800 rounded-full flex items-center justify-center hover:bg-blue-500 transition-colors"><i data-lucide="github" class="w-5 h-5"></i></a>
-                    <a id="twitterLink" href="#" target="_blank" class="w-12 h-12 bg-dark-800 rounded-full flex items-center justify-center hover:bg-blue-400 transition-colors"><i data-lucide="twitter" class="w-5 h-5"></i></a>
-                    <a id="linkedinLink" href="#" target="_blank" class="w-12 h-12 bg-dark-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
-                    <a id="emailLink" href="mailto:" class="w-12 h-12 bg-dark-800 rounded-full flex items-center justify-center hover:bg-green-500 transition-colors"><i data-lucide="mail" class="w-5 h-5"></i></a>
+                <div id="socialLinks" class="flex justify-center gap-6">
+                    <!-- 社交链接将通过 JS 动态生成 -->
                 </div>
             </div>
         </div>
@@ -131,7 +107,7 @@
 
     <footer class="bg-dark-900 border-t border-dark-700 py-8">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <p class="text-gray-500 text-sm">&copy; 2025 我的个人网站. All rights reserved.</p>
+            <p id="footerCopyright" class="text-gray-500 text-sm">&copy; 2025 我的个人网站. All rights reserved.</p>
         </div>
     </footer>
 
@@ -142,6 +118,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             lucide.createIcons();
             Data.initDefaultData();
+            Auth.initDefaultUser();
             loadSiteConfig();
             document.getElementById('mobileMenuBtn').addEventListener('click', () => {
                 document.getElementById('mobileMenu').classList.toggle('hidden');
@@ -151,15 +128,137 @@
         function loadSiteConfig() {
             const config = Data.getSiteConfig();
             if (config) {
+                // 基本信息
                 document.getElementById('authorName').textContent = config.authorName || '你的名字';
+                document.getElementById('authorTitle').textContent = config.authorTitle || '';
                 document.getElementById('authorBio').textContent = config.authorBio || '全栈开发者，热爱技术和设计';
-                if (config.socialLinks) {
-                    if (config.socialLinks.github) document.getElementById('githubLink').href = config.socialLinks.github;
-                    if (config.socialLinks.twitter) document.getElementById('twitterLink').href = config.socialLinks.twitter;
-                    if (config.socialLinks.linkedin) document.getElementById('linkedinLink').href = config.socialLinks.linkedin;
-                    if (config.socialLinks.email) document.getElementById('emailLink').href = `mailto:${config.socialLinks.email}`;
+                
+                // 页面标题
+                document.title = (config.seo?.title || config.siteName || '我的个人网站') + ' - 关于我';
+                
+                // 导航栏品牌名
+                const navBrand = document.querySelector('.font-display.gradient-text');
+                if (navBrand) {
+                    navBrand.textContent = config.siteName || 'Portfolio';
+                }
+                
+                // 技能
+                renderSkills(config.skills || []);
+                
+                // 工作经历
+                renderExperience(config.experiences || []);
+                
+                // 教育经历
+                renderEducation(config.education || []);
+                
+                // 社交链接
+                renderSocialLinks(config.socialLinks || {});
+                
+                // 页脚
+                if (config.footer?.copyright) {
+                    document.getElementById('footerCopyright').textContent = config.footer.copyright;
                 }
             }
+        }
+        
+        // 渲染技能
+        function renderSkills(skills) {
+            const container = document.getElementById('skillsContainer');
+            if (!container) return;
+            
+            if (skills.length === 0) {
+                container.innerHTML = '<p class="text-gray-500">暂无技能信息</p>';
+                return;
+            }
+            
+            container.innerHTML = skills.map(skill => `
+                <div>
+                    <div class="flex justify-between mb-1">
+                        <span class="text-gray-300">${skill.name || '技能'}</span>
+                        <span class="text-gray-500">${skill.level || 0}%</span>
+                    </div>
+                    <div class="h-2 bg-dark-700 rounded-full">
+                        <div class="h-full bg-gradient-to-r from-blue-500 to-purple-500 rounded-full" style="width: ${skill.level || 0}%"></div>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        // 渲染工作经历
+        function renderExperience(experiences) {
+            const container = document.getElementById('experienceContainer');
+            const section = document.getElementById('experienceSection');
+            if (!container) return;
+            
+            if (experiences.length === 0) {
+                section.style.display = 'none';
+                return;
+            }
+            
+            section.style.display = 'block';
+            container.innerHTML = experiences.map(exp => `
+                <div class="timeline-item">
+                    <h3 class="text-lg font-semibold text-white">${exp.position || '职位'}</h3>
+                    <p class="text-blue-400 mb-2">${exp.company || '公司'} · ${exp.startDate || ''} - ${exp.endDate || '至今'}</p>
+                    <p class="text-gray-400">${exp.description || ''}</p>
+                </div>
+            `).join('');
+        }
+        
+        // 渲染教育经历
+        function renderEducation(education) {
+            const container = document.getElementById('educationContainer');
+            const section = document.getElementById('educationSection');
+            if (!container) return;
+            
+            if (education.length === 0) {
+                section.style.display = 'none';
+                return;
+            }
+            
+            section.style.display = 'block';
+            container.innerHTML = education.map(edu => `
+                <div class="timeline-item">
+                    <h3 class="text-lg font-semibold text-white">${edu.degree || '学位'}</h3>
+                    <p class="text-blue-400 mb-2">${edu.school || '学校'} · ${edu.startDate || ''} - ${edu.endDate || ''}</p>
+                    <p class="text-gray-400">${edu.description || ''}</p>
+                </div>
+            `).join('');
+        }
+        
+        // 渲染社交链接
+        function renderSocialLinks(socialLinks) {
+            const container = document.getElementById('socialLinks');
+            if (!container) return;
+            
+            let html = '';
+            
+            if (socialLinks.github) {
+                html += `<a href="${socialLinks.github}" target="_blank" class="w-12 h-12 bg-dark-800 rounded-full flex items-center justify-center hover:bg-blue-500 transition-colors"><i data-lucide="github" class="w-5 h-5"></i></a>`;
+            }
+            
+            if (socialLinks.twitter) {
+                html += `<a href="${socialLinks.twitter}" target="_blank" class="w-12 h-12 bg-dark-800 rounded-full flex items-center justify-center hover:bg-blue-400 transition-colors"><i data-lucide="twitter" class="w-5 h-5"></i></a>`;
+            }
+            
+            if (socialLinks.linkedin) {
+                html += `<a href="${socialLinks.linkedin}" target="_blank" class="w-12 h-12 bg-dark-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors"><i data-lucide="linkedin" class="w-5 h-5"></i></a>`;
+            }
+            
+            if (socialLinks.weibo) {
+                html += `<a href="${socialLinks.weibo}" target="_blank" class="w-12 h-12 bg-dark-800 rounded-full flex items-center justify-center hover:bg-red-500 transition-colors"><i data-lucide="globe" class="w-5 h-5"></i></a>`;
+            }
+            
+            if (socialLinks.email) {
+                html += `<a href="mailto:${socialLinks.email}" class="w-12 h-12 bg-dark-800 rounded-full flex items-center justify-center hover:bg-green-500 transition-colors"><i data-lucide="mail" class="w-5 h-5"></i></a>`;
+            }
+            
+            if (!html) {
+                html = '<p class="text-gray-500">暂无联系方式</p>';
+            }
+            
+            container.innerHTML = html;
+            lucide.createIcons();
         }
     </script>
 </body>
