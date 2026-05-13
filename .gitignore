@@ -1,25 +1,28 @@
-# 临时文件
-*.tmp
-*.log
+# OS 文件
 .DS_Store
 Thumbs.db
+*.swp
 
-# 编辑器文件
+# 编辑器
 .vscode/
 .idea/
-*.swp
-*.swo
-*~
+*.sublime-project
+*.sublime-workspace
+*.vscode/*
+!.vscode/extensions.json
+*.code-workspace
 
-# 依赖
+# Node.js（虽然项目不需要）
 node_modules/
 package-lock.json
 yarn.lock
 
-# 构建输出
-build/
-dist/
+# 临时文件
+*.log
+*.tmp
+*.temp
 
-# 环境配置
+# 环境变量
 .env
 .env.local
+.env.*.local

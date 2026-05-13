@@ -1,136 +1,168 @@
-# 部署指南
+# GitHub Pages 部署指南
 
-推荐两种最简单的部署方式：
+这个指南将帮助你将个人网站部署到 GitHub Pages，完全免费！
+
+## 前置准备
+
+确保你已经安装了：
+- Git（[下载地址](https://git-scm.com/downloads)）
+- GitHub 账号
 
 ---
 
-## 🚀 方式一：Vercel 部署（最推荐）
+## 步骤 1：初始化 Git 仓库
 
-### 优点
-- ✅ 完全免费
-- ✅ 自动 HTTPS
-- ✅ 全球 CDN 加速
-- ✅ 部署最快（1分钟内）
-
-### 步骤
-
-#### 1. 注册 Vercel 账号
-访问 https://vercel.com 并使用 GitHub 账号登录
-
-#### 2. 上传项目到 GitHub
-1. 创建新的 GitHub 仓库（名称例如：`my-website`）
-2. 在 `my-website` 文件夹下运行：
+在项目目录中打开命令行，运行：
 
 ```bash
+cd "g:\study\TRAE SOLO CN\project\my\my-website"
 git init
-git add .
-git commit -m "Initial commit"
-git branch -M main
-git remote add origin https://github.com/你的用户名/my-website.git
-git push -u origin main
 ```
 
-#### 3. 在 Vercel 导入项目
-1. 进入 Vercel Dashboard
-2. 点击 "Import Project"
-3. 选择刚才创建的 GitHub 仓库
-4. 保持默认设置，点击 "Deploy"
-5. 等待 30秒，部署完成！
+---
 
-#### 4. 获取访问链接
-部署完成后，你会获得类似 `https://my-website-xxx.vercel.app` 的链接
+## 步骤 2：创建 GitHub 仓库
+
+1. 访问 https://github.com/new
+2. **Repository name**：输入仓库名称，例如：`my-website` 或 `personal-website`
+3. **Description**（可选）：输入仓库描述，例如："我的个人网站，带后台管理"
+4. 选择 **Public**（公开）或 **Private**（私有）
+   - Public：完全免费，所有人可以查看
+   - Private：免费，但其他人不能查看
+5. **不要勾选** "Initialize this repository with" 下面的任何选项
+6. 点击 **Create repository**
 
 ---
 
-## 🌟 方式二：GitHub Pages 部署（完全免费）
+## 步骤 3：推送代码到 GitHub
 
-### 优点
-- ✅ 完全免费
-- ✅ 永久有效
-- ✅ 自带 HTTPS
+创建仓库后，GitHub 会显示设置指南。根据你是否已经设置过 Git，选择下面一种方式：
 
-### 步骤
+### 方式 A：首次使用 Git（推荐）
 
-#### 1. 创建 GitHub 仓库
-1. 访问 https://github.com/new
-2. 仓库名称：`my-website`（或其他你喜欢的名字）
-3. 选择 "Public" 或 "Private"
-4. **不要勾选** "Initialize this repository with" 任何选项
-5. 点击 "Create repository"
-
-#### 2. 上传代码
-
-在 `my-website` 文件夹右键，选择 "Git Bash Here" 或打开 PowerShell，运行：
+在命令行中运行：
 
 ```bash
-# 初始化 Git
-git init
+# 配置你的用户信息（只需要做一次）
+git config --global user.name "你的名字"
+git config --global user.email "你的邮箱"
 
 # 添加所有文件
 git add .
 
-# 提交
-git commit -m "Initial commit"
+# 创建提交
+git commit -m "Initial commit - 个人网站"
 
-# 推送到 GitHub（替换以下信息）
-git remote add origin https://github.com/你的用户名/my-website.git
+# 关联远程仓库（将 YOUR_USERNAME 替换为你的 GitHub 用户名）
+git remote add origin https://github.com/YOUR_USERNAME/my-website.git
+
+# 重命名分支为 main
+git branch -M main
+
+# 推送到 GitHub
+git push -u origin main
+```
+
+### 方式 B：已有 Git 配置
+
+如果之前已经配置过 Git，直接运行：
+
+```bash
+git add .
+git commit -m "Initial commit - 个人网站"
+git remote add origin https://github.com/YOUR_USERNAME/my-website.git
 git branch -M main
 git push -u origin main
 ```
 
-**如果遇到问题**，可以手动上传：
-1. 在 GitHub 仓库页面点击 "uploading an existing file"
-2. 拖拽 `my-website` 文件夹内的所有文件（不是文件夹本身）
-3. 点击 "Commit changes"
+---
 
-#### 3. 启用 GitHub Pages
+## 步骤 4：启用 GitHub Pages
 
-1. 进入你的 GitHub 仓库 → `Settings`（设置）
-2. 左侧菜单找到 `Pages`
-3. 在 `Branch` 下拉菜单选择 `main` 或 `gh-pages`
-4. 点击 `Save`
-5. 等待 1-3 分钟，页面会显示访问链接
-
-#### 4. 访问你的网站
-链接格式通常是：
-```
-https://你的用户名.github.io/my-website/
-```
+1. 进入你的 GitHub 仓库页面
+2. 点击顶部的 **Settings** 标签
+3. 在左侧菜单中找到 **Pages**（在 "Code and automation" 下面）
+4. 在 **Build and deployment** 部分：
+   - **Source**：选择 `Deploy from a branch`
+   - **Branch**：选择 `main` 分支
+   - **Folder**：选择 `/ (root)`
+5. 点击 **Save**
+6. 等待 1-2 分钟，页面会刷新，显示部署状态
 
 ---
 
-## 📝 快速操作：如果不想用 Git
+## 步骤 5：访问你的网站
 
-你可以直接用 **Netlify Drop**，超级简单：
+部署成功后，GitHub 会显示你的网站地址：
 
-1. 访问 https://app.netlify.com/drop
-2. 把 `my-website` 文件夹内的所有文件拖拽到网页上
-3. 等待 10秒，立即获得访问链接！
+- 格式：`https://YOUR_USERNAME.github.io/my-website/`
+- 或者：`https://YOUR_USERNAME.github.io/仓库名/`
 
----
-
-## 🔐 后台登录信息
-
-不管用哪种方式部署，后台登录地址都是：
-```
-你的网站地址/admin/login.html
-```
-
-默认账号：
-- 用户名：`admin`
-- 密码：`admin123`
+点击链接即可访问你的网站！
 
 ---
 
-## 💡 提示
+## 更新网站
 
-### 如何更新网站？
+以后你修改了代码，只需要运行：
 
-**Vercel 方式：**
-- 只要推送代码到 GitHub，Vercel 会自动重新部署
+```bash
+git add .
+git commit -m "更新描述"
+git push
+```
 
-**GitHub Pages 方式：**
-- 修改文件后重新 `git add`、`git commit`、`git push` 即可
+GitHub Pages 会自动重新部署，通常只需要几秒钟。
 
-### 数据持久化
-因为数据存储在浏览器 LocalStorage，访问者的数据不会同步到你后台，这是正常的。
+---
+
+## 常见问题
+
+### Q: 推送时提示需要登录？
+
+**A:** GitHub 现在不再支持密码登录，你需要使用 Personal Access Token。
+
+获取 Token 的方法：
+1. GitHub → 点击头像 → Settings
+2. 左侧菜单 → Developer settings → Personal access tokens → Tokens (classic)
+3. 点击 **Generate new token** → Generate new token (classic)
+4. 勾选 `repo` 权限
+5. 点击 Generate token
+6. 复制这个 Token（只显示一次！）
+7. 推送时，用户名输入你的 GitHub 用户名，密码输入这个 Token
+
+### Q: 可以使用自定义域名吗？
+
+**A:** 可以！在 Settings > Pages 页面，底部有 Custom domain 选项。
+
+### Q: 后台管理还能用吗？
+
+**A:** 可以！后台地址是 `https://你的域名/admin/login.html`，登录信息不变。
+
+**注意**：数据保存在 LocalStorage 中，不同设备/浏览器的数据不互通。
+
+### Q: 部署后数据会保留吗？
+
+**A:** 部署只更新代码，数据保存在浏览器本地，不会受影响。
+
+### Q: 如何备份数据？
+
+**A:** 在后台的仪表盘页面，你可以导出数据（如果功能已实现），或者在浏览器开发者工具 → Application → Local Storage 中手动复制。
+
+---
+
+## 其他部署方式
+
+如果你不想用 GitHub Pages，也可以试试：
+
+- **Vercel**：https://vercel.com - 导入 GitHub 仓库，一键部署
+- **Netlify**：https://netlify.com - 拖拽上传或连接 GitHub
+- **Cloudflare Pages**：https://pages.cloudflare.com - 全球 CDN，速度快
+
+---
+
+## 需要帮助？
+
+如果遇到问题，可以：
+1. 查看 GitHub Pages 文档：https://pages.github.com
+2. 或者向我提问！

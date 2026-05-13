@@ -34,16 +34,72 @@ function initDefaultData() {
             authorName: '你的名字',
             authorBio: '全栈开发者，热爱技术和设计',
             authorAvatar: '',
+            authorTitle: '全栈开发工程师',
+            authorLocation: '北京, 中国',
+            authorEmail: 'your@email.com',
+            // 个人介绍（首页 Hero 区域）
+            hero: {
+                title: '你好，我是',
+                subtitle: '用代码创造无限可能',
+                description: '我是一名全栈开发者，专注于构建优雅、高性能的 Web 应用',
+                ctaText: '查看我的作品',
+                ctaLink: 'projects.html'
+            },
+            // 技能
+            skills: [
+                { name: 'JavaScript', level: 95 },
+                { name: 'React', level: 90 },
+                { name: 'Node.js', level: 85 },
+                { name: 'Vue.js', level: 80 },
+                { name: 'TypeScript', level: 85 },
+                { name: 'Python', level: 75 }
+            ],
+            // 工作经历
+            experiences: [
+                {
+                    company: '某科技公司',
+                    position: '高级前端工程师',
+                    startDate: '2022-01',
+                    endDate: '至今',
+                    description: '负责产品的前端架构设计和核心功能开发'
+                },
+                {
+                    company: '某创业公司',
+                    position: '全栈开发工程师',
+                    startDate: '2020-06',
+                    endDate: '2021-12',
+                    description: '从零搭建产品技术栈，从前端到后端全流程开发'
+                }
+            ],
+            // 教育经历
+            education: [
+                {
+                    school: '某大学',
+                    degree: '计算机科学学士',
+                    startDate: '2016-09',
+                    endDate: '2020-06',
+                    description: '主修计算机科学与技术'
+                }
+            ],
+            // 社交媒体链接
             socialLinks: {
-                github: '',
+                github: 'https://github.com/yourusername',
                 twitter: '',
                 linkedin: '',
-                email: ''
+                weibo: '',
+                zhihu: '',
+                email: 'your@email.com'
             },
+            // SEO
             seo: {
                 title: '我的个人网站',
                 description: '一个展示作品和分享技术的个人空间',
                 keywords: '个人网站,博客,作品集'
+            },
+            // 页脚
+            footer: {
+                copyright: '© 2024 你的名字. All rights reserved.',
+                extraLinks: []
             }
         };
         storageSet(KEYS.SITE_CONFIG, defaultConfig);

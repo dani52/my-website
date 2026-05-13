@@ -14,17 +14,35 @@ function hashPassword(password) {
     return Math.abs(hash).toString(16);
 }
 
-// 生成 JWT Token（简化版）
+// Base64 编码（兼容所有浏览器）
+function base64Encode(str) {
+    try {
+        return btoa(unescape(encodeURIComponent(str)));
+    } catch (e) {
+        return btoa(str);
+    }
+}
+
+// Base64 解码
+function base64Decode(str) {
+    try {
+        return decodeURIComponent(escape(atob(str)));
+    } catch (e) {
+        return atob(str);
+    }
+}
+
+// 生成 Token（简化版）
 function generateToken(user) {
-    const header = btoa(JSON.stringify({ alg: 'HS256', typ: 'JWT' }));
-    const payload = btoa(JSON.stringify({
+    const header = base64Encode(JSON.stringify({ alg: 'HS256', typ: 'JWT' }));
+    const payload = base64Encode(JSON.stringify({
         sub: user.id,
         username: user.username,
         name: user.name,
         iat: Date.now(),
-        exp: Date.now() + 24 * 60 * 60 * 1000 // 24小时过期
+        exp: Date.now() + 24 * 60 * 60 * 1000
     }));
-    const signature = btoa(`${header}.${payload}.${generateUUID()}`);
+    const signature = base64Encode(`${header}.${payload}.${generateUUID()}`);
     return `${header}.${payload}.${signature}`;
 }
 
@@ -32,7 +50,7 @@ function generateToken(user) {
 function parseToken(token) {
     try {
         const [, payload] = token.split('.');
-        return JSON.parse(atob(payload));
+        return JSON.parse(base64Decode(payload));
     } catch (e) {
         return null;
     }

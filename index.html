@@ -119,15 +119,16 @@
                     </div>
                 </div>
                 <h1 class="font-display text-5xl md:text-7xl font-bold mb-6">
-                    <span class="gradient-text">你好，我是</span>
+                    <span id="heroTitle" class="gradient-text">你好，我是</span>
                     <span id="authorName" class="text-white">开发者</span>
                 </h1>
-                <p id="authorBio" class="text-xl text-gray-400 max-w-2xl mx-auto mb-10">
+                <p id="heroSubtitle" class="text-2xl text-purple-400 mb-4 font-display"></p>
+                <p id="heroDescription" class="text-xl text-gray-400 max-w-2xl mx-auto mb-10">
                     全栈开发者，热爱技术和设计，专注于创造优秀的用户体验
                 </p>
                 <div class="flex flex-wrap justify-center gap-4">
-                    <a href="projects.html" class="px-8 py-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full font-medium hover:shadow-lg hover:shadow-blue-500/30 transition-all transform hover:scale-105">
-                        查看作品
+                    <a id="heroCtaLink" href="projects.html" class="px-8 py-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full font-medium hover:shadow-lg hover:shadow-blue-500/30 transition-all transform hover:scale-105">
+                        <span id="heroCtaText">查看作品</span>
                     </a>
                     <a href="blog.html" class="px-8 py-3 border border-dark-600 rounded-full font-medium hover:bg-dark-800 transition-all">
                         阅读博客
@@ -182,17 +183,8 @@
                 <h2 class="font-display text-3xl md:text-4xl font-bold mb-4">技术栈</h2>
                 <p class="text-gray-400">我使用的技术和工具</p>
             </div>
-            <div class="flex flex-wrap justify-center gap-4" data-animate>
-                <span class="px-4 py-2 bg-dark-800 rounded-full text-gray-300 border border-dark-700">JavaScript</span>
-                <span class="px-4 py-2 bg-dark-800 rounded-full text-gray-300 border border-dark-700">TypeScript</span>
-                <span class="px-4 py-2 bg-dark-800 rounded-full text-gray-300 border border-dark-700">React</span>
-                <span class="px-4 py-2 bg-dark-800 rounded-full text-gray-300 border border-dark-700">Vue.js</span>
-                <span class="px-4 py-2 bg-dark-800 rounded-full text-gray-300 border border-dark-700">Node.js</span>
-                <span class="px-4 py-2 bg-dark-800 rounded-full text-gray-300 border border-dark-700">Python</span>
-                <span class="px-4 py-2 bg-dark-800 rounded-full text-gray-300 border border-dark-700">Tailwind CSS</span>
-                <span class="px-4 py-2 bg-dark-800 rounded-full text-gray-300 border border-dark-700">PostgreSQL</span>
-                <span class="px-4 py-2 bg-dark-800 rounded-full text-gray-300 border border-dark-700">Docker</span>
-                <span class="px-4 py-2 bg-dark-800 rounded-full text-gray-300 border border-dark-700">Git</span>
+            <div id="skillsContainer" class="flex flex-wrap justify-center gap-4" data-animate>
+                <!-- 技能将通过 JS 动态生成 -->
             </div>
         </div>
     </section>
@@ -248,7 +240,7 @@
             
             // 初始化默认数据
             Data.initDefaultData();
-            await Auth.initDefaultUser();
+            Auth.initDefaultUser();
             
             // 加载站点配置
             loadSiteConfig();
@@ -260,40 +252,95 @@
             loadLatestPosts();
             
             // 初始化动画
-            Utils.initPageAnimations();
+            if (typeof Utils !== 'undefined' && Utils.initPageAnimations) {
+                Utils.initPageAnimations();
+            }
             
             // 移动端菜单
             const mobileMenuBtn = document.getElementById('mobileMenuBtn');
             const mobileMenu = document.getElementById('mobileMenu');
-            mobileMenuBtn.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
-            });
+            if (mobileMenuBtn && mobileMenu) {
+                mobileMenuBtn.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
         });
         
         // 加载站点配置
         function loadSiteConfig() {
             const config = Data.getSiteConfig();
             if (config) {
+                // 基本信息
                 document.getElementById('authorName').textContent = config.authorName || '开发者';
                 document.getElementById('authorBio').textContent = config.authorBio || '全栈开发者，热爱技术和设计';
                 document.getElementById('footerSiteName').textContent = config.siteName || '我的个人网站';
                 
+                // 页面标题
+                document.title = config.seo?.title || config.siteName || '我的个人网站';
+                
+                // 导航栏品牌名
+                const navBrand = document.querySelector('.font-display.gradient-text');
+                if (navBrand) {
+                    navBrand.textContent = config.siteName || 'Portfolio';
+                }
+                
+                // Hero 区域
+                if (config.hero) {
+                    const heroTitle = document.querySelector('#heroTitle');
+                    const heroSubtitle = document.querySelector('#heroSubtitle');
+                    const heroDesc = document.querySelector('#heroDescription');
+                    const heroCtaText = document.querySelector('#heroCtaText');
+                    const heroCtaLink = document.querySelector('#heroCtaLink');
+                    
+                    if (heroTitle) heroTitle.textContent = config.hero.title || '你好，我是';
+                    if (heroSubtitle) heroSubtitle.textContent = config.hero.subtitle || '';
+                    if (heroDesc) heroDesc.textContent = config.hero.description || '全栈开发者，热爱技术和设计';
+                    if (heroCtaText) heroCtaText.textContent = config.hero.ctaText || '查看作品';
+                    if (heroCtaLink) heroCtaLink.href = config.hero.ctaLink || 'projects.html';
+                }
+                
+                // 技能
+                renderSkills(config.skills || []);
+                
                 // 社交链接
                 if (config.socialLinks) {
                     if (config.socialLinks.github) {
-                        document.getElementById('githubLink').href = config.socialLinks.github;
+                        const link = document.getElementById('githubLink');
+                        if (link) link.href = config.socialLinks.github;
                     }
                     if (config.socialLinks.twitter) {
-                        document.getElementById('twitterLink').href = config.socialLinks.twitter;
+                        const link = document.getElementById('twitterLink');
+                        if (link) link.href = config.socialLinks.twitter;
                     }
                     if (config.socialLinks.linkedin) {
-                        document.getElementById('linkedinLink').href = config.socialLinks.linkedin;
+                        const link = document.getElementById('linkedinLink');
+                        if (link) link.href = config.socialLinks.linkedin;
                     }
                     if (config.socialLinks.email) {
-                        document.getElementById('emailLink').href = `mailto:${config.socialLinks.email}`;
+                        const link = document.getElementById('emailLink');
+                        if (link) link.href = `mailto:${config.socialLinks.email}`;
                     }
                 }
             }
+        }
+        
+        // 渲染技能
+        function renderSkills(skills) {
+            const container = document.getElementById('skillsContainer');
+            if (!container) return;
+            
+            if (skills.length === 0) {
+                container.innerHTML = `
+                    <span class="px-4 py-2 bg-dark-800 rounded-full text-gray-300 border border-dark-700">JavaScript</span>
+                    <span class="px-4 py-2 bg-dark-800 rounded-full text-gray-300 border border-dark-700">TypeScript</span>
+                    <span class="px-4 py-2 bg-dark-800 rounded-full text-gray-300 border border-dark-700">React</span>
+                `;
+                return;
+            }
+            
+            container.innerHTML = skills.map(skill => `
+                <span class="px-4 py-2 bg-dark-800 rounded-full text-gray-300 border border-dark-700">${skill.name}</span>
+            `).join('');
         }
         
         // 加载精选项目
