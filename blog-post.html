@@ -39,12 +39,12 @@
     <nav class="fixed top-0 left-0 right-0 z-50 bg-dark-900/80 backdrop-blur-md border-b border-dark-700">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
-                <a href="index.html" class="font-display text-xl font-bold gradient-text">Portfolio</a>
+                <a href="index.html" class="font-display text-xl font-bold gradient-text">��ҳ</a>
                 <div class="hidden md:flex items-center space-x-8">
                     <a href="index.html" class="text-gray-400 hover:text-white transition-colors">首页</a>
-                    <a href="projects.html" class="text-gray-400 hover:text-white transition-colors">作品集</a>
+                    <a href="projects.html" class="text-gray-400 hover:text-white transition-colors">作品�?/a>
                     <a href="blog.html" class="text-blue-400 font-medium">博客</a>
-                    <a href="about.html" class="text-gray-400 hover:text-white transition-colors">关于我</a>
+                    <a href="about.html" class="text-gray-400 hover:text-white transition-colors">关于�?/a>
                 </div>
                 <button id="mobileMenuBtn" class="md:hidden text-gray-400 hover:text-white"><i data-lucide="menu" class="w-6 h-6"></i></button>
             </div>
@@ -96,7 +96,7 @@
                 <div class="flex items-center gap-4 text-sm text-gray-500 mb-4">
                     <span>${Utils.formatDate(post.createdAt)}</span>
                     <span>${Utils.calculateReadingTime(post.content)} 分钟阅读</span>
-                    <span>${post.views || 0} 次阅读</span>
+                    <span>${post.views || 0} 次阅�?/span>
                 </div>
                 <h1 class="font-display text-3xl md:text-4xl lg:text-5xl font-bold mb-6">${post.title}</h1>
                 ${post.coverImage ? `<img src="${post.coverImage}" alt="${post.title}" class="w-full rounded-2xl">` : ''}
@@ -112,8 +112,8 @@
 
             document.getElementById('postFooter').innerHTML = `
                 <div class="flex flex-col md:flex-row justify-between gap-4">
-                    ${prevPost ? `<a href="blog-post.html?slug=${prevPost.slug}" class="flex items-center gap-2 text-gray-400 hover:text-white transition-colors"><i data-lucide="arrow-left" class="w-4 h-4"></i><span>上一篇: ${prevPost.title}</span></a>` : '<div></div>'}
-                    ${nextPost ? `<a href="blog-post.html?slug=${nextPost.slug}" class="flex items-center gap-2 text-gray-400 hover:text-white transition-colors md:text-right"><span>下一篇: ${nextPost.title}</span><i data-lucide="arrow-right" class="w-4 h-4"></i></a>` : '<div></div>'}
+                    ${prevPost ? `<a href="blog-post.html?slug=${prevPost.slug}" class="flex items-center gap-2 text-gray-400 hover:text-white transition-colors"><i data-lucide="arrow-left" class="w-4 h-4"></i><span>上一�? ${prevPost.title}</span></a>` : '<div></div>'}
+                    ${nextPost ? `<a href="blog-post.html?slug=${nextPost.slug}" class="flex items-center gap-2 text-gray-400 hover:text-white transition-colors md:text-right"><span>下一�? ${nextPost.title}</span><i data-lucide="arrow-right" class="w-4 h-4"></i></a>` : '<div></div>'}
                 </div>
             `;
             lucide.createIcons();

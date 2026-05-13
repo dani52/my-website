@@ -5,325 +5,263 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>站点设置 - 后台管理</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-    <link rel="stylesheet" href="../css/custom.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        dark: { 900: '#0a0a0f', 800: '#1e293b', 700: '#334155', 600: '#475569' }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; background: #0a0a0f; }
+        .font-display { font-family: 'Space Grotesk', sans-serif; }
+        .gradient-text { background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #06b6d4 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    </style>
 </head>
-<body class="bg-gray-900 text-gray-100 min-h-screen">
-    <div class="flex">
-        <!-- Sidebar -->
-        <aside class="w-64 bg-gray-800 min-h-screen p-4 border-r border-gray-700">
-            <div class="flex items-center gap-2 mb-8">
-                <i data-lucide="monitor" class="w-6 h-6 text-cyan-400"></i>
-                <span class="text-xl font-bold bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">后台管理</span>
+<body class="text-gray-100 min-h-screen">
+    <div class="flex h-screen">
+        <aside class="w-64 bg-dark-800 border-r border-dark-700 flex flex-col">
+            <div class="p-6 border-b border-dark-700">
+                <a href="../index.html" target="_blank" class="font-display text-xl font-bold gradient-text">后台管理</a>
             </div>
-            
-            <nav class="space-y-2">
-                <a href="index.html" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-700 text-gray-300 hover:text-white transition">
-                    <i data-lucide="home" class="w-5 h-5"></i>
-                    仪表盘
+            <nav class="flex-1 p-4 space-y-2">
+                <a href="index.html" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:bg-dark-700 hover:text-white rounded-lg transition-colors">
+                    <i data-lucide="layout-dashboard" class="w-5 h-5"></i>
+                    <span>仪表盘</span>
                 </a>
-                <a href="posts.html" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-700 text-gray-300 hover:text-white transition">
+                <a href="posts.html" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:bg-dark-700 hover:text-white rounded-lg transition-colors">
                     <i data-lucide="file-text" class="w-5 h-5"></i>
-                    文章管理
+                    <span>文章管理</span>
                 </a>
-                <a href="projects.html" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-700 text-gray-300 hover:text-white transition">
-                    <i data-lucide="folder-kanban" class="w-5 h-5"></i>
-                    项目管理
+                <a href="projects.html" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:bg-dark-700 hover:text-white rounded-lg transition-colors">
+                    <i data-lucide="folder" class="w-5 h-5"></i>
+                    <span>项目管理</span>
                 </a>
-                <a href="categories.html" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-700 text-gray-300 hover:text-white transition">
+                <a href="categories.html" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:bg-dark-700 hover:text-white rounded-lg transition-colors">
                     <i data-lucide="tags" class="w-5 h-5"></i>
-                    分类管理
+                    <span>分类管理</span>
                 </a>
-                <a href="settings.html" class="flex items-center gap-3 px-3 py-2 rounded-lg bg-cyan-500/20 text-cyan-400 border border-cyan-500/30">
+                <a href="settings.html" class="flex items-center gap-3 px-4 py-3 bg-blue-500/10 text-blue-400 rounded-lg">
                     <i data-lucide="settings" class="w-5 h-5"></i>
-                    站点设置
+                    <span>站点设置</span>
                 </a>
             </nav>
-            
-            <div class="mt-8 pt-8 border-t border-gray-700">
-                <button id="logoutBtn" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-red-500/20 text-gray-300 hover:text-red-400 w-full transition">
+            <div class="p-4 border-t border-dark-700">
+                <button id="logoutBtn" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-red-400 transition-colors w-full">
                     <i data-lucide="log-out" class="w-5 h-5"></i>
-                    退出登录
+                    <span>退出登录</span>
                 </button>
             </div>
         </aside>
-
-        <!-- Main Content -->
-        <main class="flex-1 p-6">
-            <header class="flex justify-between items-center mb-8">
-                <div>
-                    <h1 class="text-2xl font-bold">站点设置</h1>
-                    <p class="text-gray-400 mt-1">管理网站的所有配置信息</p>
+        <main class="flex-1 overflow-auto">
+            <header class="bg-dark-800/50 backdrop-blur-md border-b border-dark-700 sticky top-0 z-10">
+                <div class="px-8 py-4 flex justify-between items-center">
+                    <h1 class="font-display text-2xl font-bold">站点设置</h1>
+                    <div class="flex items-center gap-4">
+                        <span id="currentUser" class="text-gray-400"></span>
+                        <a href="../index.html" target="_blank" class="text-blue-400 hover:text-blue-300 text-sm">查看网站</a>
+                    </div>
                 </div>
             </header>
-
-            <div id="successMessage" class="hidden fixed top-4 right-4 bg-green-500/20 border border-green-500 text-green-400 px-4 py-3 rounded-lg flex items-center gap-2">
-                <i data-lucide="check"></i>
-                <span>保存成功！</span>
-            </div>
-
-            <form id="settingsForm" class="space-y-8">
-                <!-- 基本信息 -->
-                <section class="bg-gray-800 rounded-xl p-6 border border-gray-700">
-                    <h2 class="text-lg font-semibold mb-6 flex items-center gap-2">
-                        <i data-lucide="user" class="w-5 h-5 text-cyan-400"></i>
-                        基本信息
-                    </h2>
-                    
-                    <div class="grid md:grid-cols-2 gap-6">
-                        <div>
-                            <label class="block text-sm text-gray-400 mb-2">网站名称</label>
-                            <input type="text" id="siteName" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white focus:border-cyan-500 focus:outline-none transition">
+            <div class="p-8">
+                <div id="successMessage" class="hidden fixed top-24 right-8 bg-green-500/20 border border-green-500 text-green-400 px-6 py-4 rounded-xl flex items-center gap-3 z-50">
+                    <i data-lucide="check-circle" class="w-5 h-5"></i>
+                    <span>保存成功！</span>
+                </div>
+                <form id="settingsForm" class="space-y-8">
+                    <section class="bg-dark-800 rounded-xl p-6 border border-dark-700">
+                        <h2 class="text-lg font-semibold mb-6 flex items-center gap-2">
+                            <i data-lucide="user" class="w-5 h-5 text-blue-400"></i>
+                            基本信息
+                        </h2>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm text-gray-400 mb-2">网站名称</label>
+                                <input type="text" id="siteName" class="w-full bg-dark-700 border border-dark-600 rounded-lg px-4 py-3 text-white focus:border-blue-500 focus:outline-none transition-colors">
+                            </div>
+                            <div>
+                                <label class="block text-sm text-gray-400 mb-2">网站描述</label>
+                                <input type="text" id="siteDescription" class="w-full bg-dark-700 border border-dark-600 rounded-lg px-4 py-3 text-white focus:border-blue-500 focus:outline-none transition-colors">
+                            </div>
+                            <div>
+                                <label class="block text-sm text-gray-400 mb-2">你的名字</label>
+                                <input type="text" id="authorName" class="w-full bg-dark-700 border border-dark-600 rounded-lg px-4 py-3 text-white focus:border-blue-500 focus:outline-none transition-colors">
+                            </div>
+                            <div>
+                                <label class="block text-sm text-gray-400 mb-2">职位/头衔</label>
+                                <input type="text" id="authorTitle" class="w-full bg-dark-700 border border-dark-600 rounded-lg px-4 py-3 text-white focus:border-blue-500 focus:outline-none transition-colors">
+                            </div>
+                            <div>
+                                <label class="block text-sm text-gray-400 mb-2">所在地</label>
+                                <input type="text" id="authorLocation" class="w-full bg-dark-700 border border-dark-600 rounded-lg px-4 py-3 text-white focus:border-blue-500 focus:outline-none transition-colors">
+                            </div>
+                            <div>
+                                <label class="block text-sm text-gray-400 mb-2">邮箱</label>
+                                <input type="email" id="authorEmail" class="w-full bg-dark-700 border border-dark-600 rounded-lg px-4 py-3 text-white focus:border-blue-500 focus:outline-none transition-colors">
+                            </div>
                         </div>
-                        
-                        <div>
-                            <label class="block text-sm text-gray-400 mb-2">网站描述</label>
-                            <input type="text" id="siteDescription" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white focus:border-cyan-500 focus:outline-none transition">
+                    </section>
+                    <section class="bg-dark-800 rounded-xl p-6 border border-dark-700">
+                        <h2 class="text-lg font-semibold mb-6 flex items-center gap-2">
+                            <i data-lucide="layout" class="w-5 h-5 text-purple-400"></i>
+                            Hero 区域
+                        </h2>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm text-gray-400 mb-2">主标题</label>
+                                <input type="text" id="heroTitle" class="w-full bg-dark-700 border border-dark-600 rounded-lg px-4 py-3 text-white focus:border-purple-500 focus:outline-none transition-colors">
+                            </div>
+                            <div>
+                                <label class="block text-sm text-gray-400 mb-2">副标题</label>
+                                <input type="text" id="heroSubtitle" class="w-full bg-dark-700 border border-dark-600 rounded-lg px-4 py-3 text-white focus:border-purple-500 focus:outline-none transition-colors">
+                            </div>
+                            <div class="md:col-span-2">
+                                <label class="block text-sm text-gray-400 mb-2">描述文字</label>
+                                <textarea id="heroDescription" rows="3" class="w-full bg-dark-700 border border-dark-600 rounded-lg px-4 py-3 text-white focus:border-purple-500 focus:outline-none transition-colors resize-none"></textarea>
+                            </div>
+                            <div>
+                                <label class="block text-sm text-gray-400 mb-2">按钮文字</label>
+                                <input type="text" id="heroCtaText" class="w-full bg-dark-700 border border-dark-600 rounded-lg px-4 py-3 text-white focus:border-purple-500 focus:outline-none transition-colors">
+                            </div>
+                            <div>
+                                <label class="block text-sm text-gray-400 mb-2">按钮链接</label>
+                                <input type="text" id="heroCtaLink" class="w-full bg-dark-700 border border-dark-600 rounded-lg px-4 py-3 text-white focus:border-purple-500 focus:outline-none transition-colors">
+                            </div>
                         </div>
-                        
-                        <div>
-                            <label class="block text-sm text-gray-400 mb-2">你的名字</label>
-                            <input type="text" id="authorName" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white focus:border-cyan-500 focus:outline-none transition">
-                        </div>
-                        
-                        <div>
-                            <label class="block text-sm text-gray-400 mb-2">职位/头衔</label>
-                            <input type="text" id="authorTitle" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white focus:border-cyan-500 focus:outline-none transition">
-                        </div>
-                        
-                        <div>
-                            <label class="block text-sm text-gray-400 mb-2">所在地</label>
-                            <input type="text" id="authorLocation" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white focus:border-cyan-500 focus:outline-none transition">
-                        </div>
-                        
-                        <div>
-                            <label class="block text-sm text-gray-400 mb-2">邮箱</label>
-                            <input type="email" id="authorEmail" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white focus:border-cyan-500 focus:outline-none transition">
-                        </div>
-                    </div>
-                    
-                    <div class="mt-6">
-                        <label class="block text-sm text-gray-400 mb-2">个人简介</label>
-                        <textarea id="authorBio" rows="3" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white focus:border-cyan-500 focus:outline-none transition resize-none"></textarea>
-                    </div>
-                    
-                    <div class="mt-6">
-                        <label class="block text-sm text-gray-400 mb-2">头像 URL（可选）</label>
-                        <input type="text" id="authorAvatar" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white focus:border-cyan-500 focus:outline-none transition">
-                    </div>
-                </section>
-
-                <!-- Hero 区域 -->
-                <section class="bg-gray-800 rounded-xl p-6 border border-gray-700">
-                    <h2 class="text-lg font-semibold mb-6 flex items-center gap-2">
-                        <i data-lucide="rocket" class="w-5 h-5 text-purple-400"></i>
-                        Hero 区域（首页顶部）
-                    </h2>
-                    
-                    <div class="grid md:grid-cols-2 gap-6">
-                        <div>
-                            <label class="block text-sm text-gray-400 mb-2">标题</label>
-                            <input type="text" id="heroTitle" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white focus:border-purple-500 focus:outline-none transition">
-                        </div>
-                        
-                        <div>
-                            <label class="block text-sm text-gray-400 mb-2">副标题</label>
-                            <input type="text" id="heroSubtitle" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white focus:border-purple-500 focus:outline-none transition">
-                        </div>
-                    </div>
-                    
-                    <div class="mt-6">
-                        <label class="block text-sm text-gray-400 mb-2">描述文字</label>
-                        <textarea id="heroDescription" rows="3" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white focus:border-purple-500 focus:outline-none transition resize-none"></textarea>
-                    </div>
-                    
-                    <div class="grid md:grid-cols-2 gap-6 mt-6">
-                        <div>
-                            <label class="block text-sm text-gray-400 mb-2">按钮文字</label>
-                            <input type="text" id="heroCtaText" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white focus:border-purple-500 focus:outline-none transition">
-                        </div>
-                        
-                        <div>
-                            <label class="block text-sm text-gray-400 mb-2">按钮链接</label>
-                            <input type="text" id="heroCtaLink" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white focus:border-purple-500 focus:outline-none transition">
-                        </div>
-                    </div>
-                </section>
-
-                <!-- 技能 -->
-                <section class="bg-gray-800 rounded-xl p-6 border border-gray-700">
-                    <div class="flex justify-between items-center mb-6">
-                        <h2 class="text-lg font-semibold flex items-center gap-2">
-                            <i data-lucide="zap" class="w-5 h-5 text-yellow-400"></i>
+                    </section>
+                    <section class="bg-dark-800 rounded-xl p-6 border border-dark-700">
+                        <h2 class="text-lg font-semibold mb-6 flex items-center gap-2">
+                            <i data-lucide="lightbulb" class="w-5 h-5 text-yellow-400"></i>
                             技能
                         </h2>
-                        <button type="button" id="addSkillBtn" class="flex items-center gap-2 px-3 py-1.5 bg-yellow-500/20 text-yellow-400 rounded-lg hover:bg-yellow-500/30 transition">
+                        <div id="skillsList" class="space-y-4 mb-6"></div>
+                        <button type="button" id="addSkillBtn" class="flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors">
                             <i data-lucide="plus" class="w-4 h-4"></i>
                             添加技能
                         </button>
-                    </div>
-                    
-                    <div id="skillsContainer" class="space-y-4">
-                        <!-- Skills will be rendered here -->
-                    </div>
-                </section>
-
-                <!-- 工作经历 -->
-                <section class="bg-gray-800 rounded-xl p-6 border border-gray-700">
-                    <div class="flex justify-between items-center mb-6">
-                        <h2 class="text-lg font-semibold flex items-center gap-2">
-                            <i data-lucide="briefcase" class="w-5 h-5 text-blue-400"></i>
+                    </section>
+                    <section class="bg-dark-800 rounded-xl p-6 border border-dark-700">
+                        <h2 class="text-lg font-semibold mb-6 flex items-center gap-2">
+                            <i data-lucide="briefcase" class="w-5 h-5 text-green-400"></i>
                             工作经历
                         </h2>
-                        <button type="button" id="addExperienceBtn" class="flex items-center gap-2 px-3 py-1.5 bg-blue-500/20 text-blue-400 rounded-lg hover:bg-blue-500/30 transition">
+                        <div id="experiencesList" class="space-y-6 mb-6"></div>
+                        <button type="button" id="addExperienceBtn" class="flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors">
                             <i data-lucide="plus" class="w-4 h-4"></i>
-                            添加经历
+                            添加工作经历
                         </button>
-                    </div>
-                    
-                    <div id="experiencesContainer" class="space-y-6">
-                        <!-- Experiences will be rendered here -->
-                    </div>
-                </section>
-
-                <!-- 教育经历 -->
-                <section class="bg-gray-800 rounded-xl p-6 border border-gray-700">
-                    <div class="flex justify-between items-center mb-6">
-                        <h2 class="text-lg font-semibold flex items-center gap-2">
-                            <i data-lucide="graduation-cap" class="w-5 h-5 text-green-400"></i>
+                    </section>
+                    <section class="bg-dark-800 rounded-xl p-6 border border-dark-700">
+                        <h2 class="text-lg font-semibold mb-6 flex items-center gap-2">
+                            <i data-lucide="graduation-cap" class="w-5 h-5 text-orange-400"></i>
                             教育经历
                         </h2>
-                        <button type="button" id="addEducationBtn" class="flex items-center gap-2 px-3 py-1.5 bg-green-500/20 text-green-400 rounded-lg hover:bg-green-500/30 transition">
+                        <div id="educationList" class="space-y-6 mb-6"></div>
+                        <button type="button" id="addEducationBtn" class="flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors">
                             <i data-lucide="plus" class="w-4 h-4"></i>
-                            添加教育
+                            添加教育经历
+                        </button>
+                    </section>
+                    <section class="bg-dark-800 rounded-xl p-6 border border-dark-700">
+                        <h2 class="text-lg font-semibold mb-6 flex items-center gap-2">
+                            <i data-lucide="link-2" class="w-5 h-5 text-cyan-400"></i>
+                            社交媒体
+                        </h2>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm text-gray-400 mb-2">GitHub</label>
+                                <input type="url" id="socialGithub" class="w-full bg-dark-700 border border-dark-600 rounded-lg px-4 py-3 text-white focus:border-cyan-500 focus:outline-none transition-colors">
+                            </div>
+                            <div>
+                                <label class="block text-sm text-gray-400 mb-2">Twitter</label>
+                                <input type="url" id="socialTwitter" class="w-full bg-dark-700 border border-dark-600 rounded-lg px-4 py-3 text-white focus:border-cyan-500 focus:outline-none transition-colors">
+                            </div>
+                            <div>
+                                <label class="block text-sm text-gray-400 mb-2">LinkedIn</label>
+                                <input type="url" id="socialLinkedin" class="w-full bg-dark-700 border border-dark-600 rounded-lg px-4 py-3 text-white focus:border-cyan-500 focus:outline-none transition-colors">
+                            </div>
+                            <div>
+                                <label class="block text-sm text-gray-400 mb-2">微博</label>
+                                <input type="url" id="socialWeibo" class="w-full bg-dark-700 border border-dark-600 rounded-lg px-4 py-3 text-white focus:border-cyan-500 focus:outline-none transition-colors">
+                            </div>
+                        </div>
+                    </section>
+                    <section class="bg-dark-800 rounded-xl p-6 border border-dark-700">
+                        <h2 class="text-lg font-semibold mb-6 flex items-center gap-2">
+                            <i data-lucide="search" class="w-5 h-5 text-pink-400"></i>
+                            SEO 配置
+                        </h2>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm text-gray-400 mb-2">页面标题</label>
+                                <input type="text" id="seoTitle" class="w-full bg-dark-700 border border-dark-600 rounded-lg px-4 py-3 text-white focus:border-pink-500 focus:outline-none transition-colors">
+                            </div>
+                            <div>
+                                <label class="block text-sm text-gray-400 mb-2">页面描述</label>
+                                <input type="text" id="seoDescription" class="w-full bg-dark-700 border border-dark-600 rounded-lg px-4 py-3 text-white focus:border-pink-500 focus:outline-none transition-colors">
+                            </div>
+                            <div class="md:col-span-2">
+                                <label class="block text-sm text-gray-400 mb-2">关键词 (逗号分隔)</label>
+                                <input type="text" id="seoKeywords" class="w-full bg-dark-700 border border-dark-600 rounded-lg px-4 py-3 text-white focus:border-pink-500 focus:outline-none transition-colors">
+                            </div>
+                        </div>
+                    </section>
+                    <section class="bg-dark-800 rounded-xl p-6 border border-dark-700">
+                        <h2 class="text-lg font-semibold mb-6 flex items-center gap-2">
+                            <i data-lucide="layout-bottom" class="w-5 h-5 text-indigo-400"></i>
+                            页脚
+                        </h2>
+                        <div>
+                            <label class="block text-sm text-gray-400 mb-2">版权信息</label>
+                            <input type="text" id="footerCopyright" class="w-full bg-dark-700 border border-dark-600 rounded-lg px-4 py-3 text-white focus:border-indigo-500 focus:outline-none transition-colors">
+                        </div>
+                    </section>
+                    <div class="flex justify-end">
+                        <button type="submit" class="flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white px-8 py-3 rounded-lg transition-colors">
+                            <i data-lucide="save" class="w-5 h-5"></i>
+                            保存设置
                         </button>
                     </div>
-                    
-                    <div id="educationContainer" class="space-y-6">
-                        <!-- Education will be rendered here -->
-                    </div>
-                </section>
-
-                <!-- 社交媒体 -->
-                <section class="bg-gray-800 rounded-xl p-6 border border-gray-700">
-                    <h2 class="text-lg font-semibold mb-6 flex items-center gap-2">
-                        <i data-lucide="link-2" class="w-5 h-5 text-pink-400"></i>
-                        社交媒体
-                    </h2>
-                    
-                    <div class="grid md:grid-cols-2 gap-6">
-                        <div>
-                            <label class="block text-sm text-gray-400 mb-2">GitHub</label>
-                            <input type="url" id="socialGithub" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white focus:border-pink-500 focus:outline-none transition">
-                        </div>
-                        
-                        <div>
-                            <label class="block text-sm text-gray-400 mb-2">Twitter</label>
-                            <input type="url" id="socialTwitter" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white focus:border-pink-500 focus:outline-none transition">
-                        </div>
-                        
-                        <div>
-                            <label class="block text-sm text-gray-400 mb-2">LinkedIn</label>
-                            <input type="url" id="socialLinkedin" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white focus:border-pink-500 focus:outline-none transition">
-                        </div>
-                        
-                        <div>
-                            <label class="block text-sm text-gray-400 mb-2">微博</label>
-                            <input type="url" id="socialWeibo" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white focus:border-pink-500 focus:outline-none transition">
-                        </div>
-                        
-                        <div>
-                            <label class="block text-sm text-gray-400 mb-2">知乎</label>
-                            <input type="url" id="socialZhihu" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white focus:border-pink-500 focus:outline-none transition">
-                        </div>
-                    </div>
-                </section>
-
-                <!-- SEO -->
-                <section class="bg-gray-800 rounded-xl p-6 border border-gray-700">
-                    <h2 class="text-lg font-semibold mb-6 flex items-center gap-2">
-                        <i data-lucide="search" class="w-5 h-5 text-orange-400"></i>
-                        SEO 设置
-                    </h2>
-                    
-                    <div class="space-y-6">
-                        <div>
-                            <label class="block text-sm text-gray-400 mb-2">页面标题</label>
-                            <input type="text" id="seoTitle" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white focus:border-orange-500 focus:outline-none transition">
-                        </div>
-                        
-                        <div>
-                            <label class="block text-sm text-gray-400 mb-2">Meta 描述</label>
-                            <textarea id="seoDescription" rows="3" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white focus:border-orange-500 focus:outline-none transition resize-none"></textarea>
-                        </div>
-                        
-                        <div>
-                            <label class="block text-sm text-gray-400 mb-2">关键词（逗号分隔）</label>
-                            <input type="text" id="seoKeywords" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white focus:border-orange-500 focus:outline-none transition">
-                        </div>
-                    </div>
-                </section>
-
-                <!-- 页脚 -->
-                <section class="bg-gray-800 rounded-xl p-6 border border-gray-700">
-                    <h2 class="text-lg font-semibold mb-6 flex items-center gap-2">
-                        <i data-lucide="footer" class="w-5 h-5 text-gray-400"></i>
-                        页脚设置
-                    </h2>
-                    
-                    <div>
-                        <label class="block text-sm text-gray-400 mb-2">版权信息</label>
-                        <input type="text" id="footerCopyright" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white focus:border-gray-500 focus:outline-none transition">
-                    </div>
-                </section>
-
-                <!-- 保存按钮 -->
-                <div class="flex justify-end gap-4">
-                    <button type="button" onclick="location.reload()" class="px-6 py-2 border border-gray-600 text-gray-300 rounded-lg hover:bg-gray-700 transition">
-                        重置
-                    </button>
-                    <button type="submit" id="saveBtn" class="px-6 py-2 bg-gradient-to-r from-cyan-500 to-purple-500 text-white rounded-lg hover:opacity-90 transition flex items-center gap-2">
-                        <i data-lucide="save" class="w-4 h-4"></i>
-                        保存设置
-                    </button>
-                </div>
-            </form>
+                </form>
+            </div>
         </main>
     </div>
-
     <script src="../js/utils.js"></script>
     <script src="../js/auth.js"></script>
     <script src="../js/data.js"></script>
     <script>
-        let currentConfig = {};
-
+        let skills = [];
+        let experiences = [];
+        let educationList = [];
         document.addEventListener('DOMContentLoaded', () => {
             lucide.createIcons();
-            Data.initDefaultData();
-            Auth.initDefaultUser();
-
-            if (!Auth.checkAuth()) {
-                window.location.href = 'login.html';
-                return;
+            Auth.checkAuth();
+            loadSettings();
+            document.getElementById('settingsForm').addEventListener('submit', handleSave);
+            document.getElementById('addSkillBtn').addEventListener('click', addSkill);
+            document.getElementById('addExperienceBtn').addEventListener('click', addExperience);
+            document.getElementById('addEducationBtn').addEventListener('click', addEducation);
+            document.getElementById('logoutBtn').addEventListener('click', Auth.logout);
+            const user = Auth.getCurrentUser();
+            if (user) {
+                document.getElementById('currentUser').textContent = user.username;
             }
-
-            currentConfig = Data.getSiteConfig();
-            loadConfigToForm(currentConfig);
-            setupEventListeners();
         });
-
-        function loadConfigToForm(config) {
-            // 基本信息
+        function loadSettings() {
+            const config = Data.getSiteConfig();
+            if (!config) return;
             document.getElementById('siteName').value = config.siteName || '';
             document.getElementById('siteDescription').value = config.siteDescription || '';
             document.getElementById('authorName').value = config.authorName || '';
             document.getElementById('authorTitle').value = config.authorTitle || '';
             document.getElementById('authorLocation').value = config.authorLocation || '';
             document.getElementById('authorEmail').value = config.authorEmail || '';
-            document.getElementById('authorBio').value = config.authorBio || '';
-            document.getElementById('authorAvatar').value = config.authorAvatar || '';
-
-            // Hero
             if (config.hero) {
                 document.getElementById('heroTitle').value = config.hero.title || '';
                 document.getElementById('heroSubtitle').value = config.hero.subtitle || '';
@@ -331,243 +269,189 @@
                 document.getElementById('heroCtaText').value = config.hero.ctaText || '';
                 document.getElementById('heroCtaLink').value = config.hero.ctaLink || '';
             }
-
-            // 技能
-            renderSkills(config.skills || []);
-
-            // 工作经历
-            renderExperiences(config.experiences || []);
-
-            // 教育经历
-            renderEducation(config.education || []);
-
-            // 社交媒体
+            skills = config.skills || [];
+            experiences = config.experiences || [];
+            educationList = config.education || [];
             if (config.socialLinks) {
                 document.getElementById('socialGithub').value = config.socialLinks.github || '';
                 document.getElementById('socialTwitter').value = config.socialLinks.twitter || '';
                 document.getElementById('socialLinkedin').value = config.socialLinks.linkedin || '';
                 document.getElementById('socialWeibo').value = config.socialLinks.weibo || '';
-                document.getElementById('socialZhihu').value = config.socialLinks.zhihu || '';
             }
-
-            // SEO
             if (config.seo) {
                 document.getElementById('seoTitle').value = config.seo.title || '';
                 document.getElementById('seoDescription').value = config.seo.description || '';
                 document.getElementById('seoKeywords').value = config.seo.keywords || '';
             }
-
-            // 页脚
             if (config.footer) {
                 document.getElementById('footerCopyright').value = config.footer.copyright || '';
             }
+            renderSkills();
+            renderExperiences();
+            renderEducation();
         }
-
-        function renderSkills(skills) {
-            const container = document.getElementById('skillsContainer');
+        function renderSkills() {
+            const container = document.getElementById('skillsList');
             container.innerHTML = skills.map((skill, index) => `
-                <div class="flex items-end gap-4 p-4 bg-gray-700/50 rounded-lg" data-skill-index="${index}">
-                    <div class="flex-1">
-                        <label class="block text-sm text-gray-400 mb-1">技能名称</label>
-                        <input type="text" class="skill-name w-full bg-gray-700 border border-gray-600 rounded-lg px-3 py-2 text-white focus:border-yellow-500 focus:outline-none transition" value="${skill.name || ''}">
+                <div class="grid grid-cols-12 gap-4 items-end">
+                    <div class="col-span-4">
+                        <label class="block text-sm text-gray-400 mb-2">技能名称</label>
+                        <input type="text" class="skill-name w-full bg-dark-700 border border-dark-600 rounded-lg px-4 py-3 text-white focus:border-blue-500 focus:outline-none transition-colors" value="${skill.name || ''}" data-index="${index}">
                     </div>
-                    <div class="w-32">
-                        <label class="block text-sm text-gray-400 mb-1">熟练度 (%)</label>
-                        <input type="number" min="0" max="100" class="skill-level w-full bg-gray-700 border border-gray-600 rounded-lg px-3 py-2 text-white focus:border-yellow-500 focus:outline-none transition" value="${skill.level || 0}">
+                    <div class="col-span-4">
+                        <label class="block text-sm text-gray-400 mb-2">熟练程度 (0-100)</label>
+                        <input type="number" min="0" max="100" class="skill-level w-full bg-dark-700 border border-dark-600 rounded-lg px-4 py-3 text-white focus:border-blue-500 focus:outline-none transition-colors" value="${skill.level || 0}" data-index="${index}">
                     </div>
-                    <button type="button" class="remove-skill mb-2 w-10 h-10 flex items-center justify-center text-red-400 hover:bg-red-500/20 rounded-lg transition">
-                        <i data-lucide="trash-2" class="w-4 h-4"></i>
-                    </button>
+                    <div class="col-span-4 flex gap-2">
+                        <button type="button" onclick="removeSkill(${index})" class="text-red-400 hover:text-red-300 p-3">
+                            <i data-lucide="trash-2" class="w-5 h-5"></i>
+                        </button>
+                    </div>
                 </div>
             `).join('');
             lucide.createIcons();
         }
-
-        function renderExperiences(experiences) {
-            const container = document.getElementById('experiencesContainer');
+        function addSkill() {
+            skills.push({ name: '', level: 50 });
+            renderSkills();
+        }
+        window.removeSkill = function(index) {
+            skills.splice(index, 1);
+            renderSkills();
+        };
+        function renderExperiences() {
+            const container = document.getElementById('experiencesList');
             container.innerHTML = experiences.map((exp, index) => `
-                <div class="p-4 bg-gray-700/50 rounded-lg" data-exp-index="${index}">
+                <div class="p-4 bg-dark-700/50 rounded-lg border border-dark-600">
                     <div class="flex justify-between items-start mb-4">
-                        <h3 class="font-medium">工作经历 ${index + 1}</h3>
-                        <button type="button" class="remove-experience text-red-400 hover:bg-red-500/20 p-1.5 rounded-lg transition">
-                            <i data-lucide="trash-2" class="w-4 h-4"></i>
+                        <span class="text-sm text-gray-400">工作经历 #${index + 1}</span>
+                        <button type="button" onclick="removeExperience(${index})" class="text-red-400 hover:text-red-300">
+                            <i data-lucide="trash-2" class="w-5 h-5"></i>
                         </button>
                     </div>
                     <div class="grid md:grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-sm text-gray-400 mb-1">公司名称</label>
-                            <input type="text" class="exp-company w-full bg-gray-700 border border-gray-600 rounded-lg px-3 py-2 text-white focus:border-blue-500 focus:outline-none transition" value="${exp.company || ''}">
+                            <label class="block text-sm text-gray-400 mb-2">职位</label>
+                            <input type="text" class="exp-position w-full bg-dark-700 border border-dark-600 rounded-lg px-4 py-3 text-white focus:border-green-500 focus:outline-none transition-colors" value="${exp.position || ''}" data-index="${index}">
                         </div>
                         <div>
-                            <label class="block text-sm text-gray-400 mb-1">职位</label>
-                            <input type="text" class="exp-position w-full bg-gray-700 border border-gray-600 rounded-lg px-3 py-2 text-white focus:border-blue-500 focus:outline-none transition" value="${exp.position || ''}">
+                            <label class="block text-sm text-gray-400 mb-2">公司</label>
+                            <input type="text" class="exp-company w-full bg-dark-700 border border-dark-600 rounded-lg px-4 py-3 text-white focus:border-green-500 focus:outline-none transition-colors" value="${exp.company || ''}" data-index="${index}">
                         </div>
                         <div>
-                            <label class="block text-sm text-gray-400 mb-1">开始日期</label>
-                            <input type="text" class="exp-start w-full bg-gray-700 border border-gray-600 rounded-lg px-3 py-2 text-white focus:border-blue-500 focus:outline-none transition" placeholder="2024-01" value="${exp.startDate || ''}">
+                            <label class="block text-sm text-gray-400 mb-2">开始时间</label>
+                            <input type="text" class="exp-start w-full bg-dark-700 border border-dark-600 rounded-lg px-4 py-3 text-white focus:border-green-500 focus:outline-none transition-colors" value="${exp.startDate || ''}" data-index="${index}">
                         </div>
                         <div>
-                            <label class="block text-sm text-gray-400 mb-1">结束日期</label>
-                            <input type="text" class="exp-end w-full bg-gray-700 border border-gray-600 rounded-lg px-3 py-2 text-white focus:border-blue-500 focus:outline-none transition" placeholder="至今" value="${exp.endDate || ''}">
+                            <label class="block text-sm text-gray-400 mb-2">结束时间</label>
+                            <input type="text" class="exp-end w-full bg-dark-700 border border-dark-600 rounded-lg px-4 py-3 text-white focus:border-green-500 focus:outline-none transition-colors" value="${exp.endDate || ''}" data-index="${index}">
                         </div>
-                    </div>
-                    <div class="mt-4">
-                        <label class="block text-sm text-gray-400 mb-1">工作描述</label>
-                        <textarea class="exp-description w-full bg-gray-700 border border-gray-600 rounded-lg px-3 py-2 text-white focus:border-blue-500 focus:outline-none transition resize-none" rows="2">${exp.description || ''}</textarea>
+                        <div class="md:col-span-2">
+                            <label class="block text-sm text-gray-400 mb-2">描述</label>
+                            <textarea class="exp-desc w-full bg-dark-700 border border-dark-600 rounded-lg px-4 py-3 text-white focus:border-green-500 focus:outline-none transition-colors resize-none" rows="3" data-index="${index}">${exp.description || ''}</textarea>
+                        </div>
                     </div>
                 </div>
             `).join('');
             lucide.createIcons();
         }
-
-        function renderEducation(education) {
-            const container = document.getElementById('educationContainer');
-            container.innerHTML = education.map((edu, index) => `
-                <div class="p-4 bg-gray-700/50 rounded-lg" data-edu-index="${index}">
+        function addExperience() {
+            experiences.push({ position: '', company: '', startDate: '', endDate: '', description: '' });
+            renderExperiences();
+        }
+        window.removeExperience = function(index) {
+            experiences.splice(index, 1);
+            renderExperiences();
+        };
+        function renderEducation() {
+            const container = document.getElementById('educationList');
+            container.innerHTML = educationList.map((edu, index) => `
+                <div class="p-4 bg-dark-700/50 rounded-lg border border-dark-600">
                     <div class="flex justify-between items-start mb-4">
-                        <h3 class="font-medium">教育经历 ${index + 1}</h3>
-                        <button type="button" class="remove-education text-red-400 hover:bg-red-500/20 p-1.5 rounded-lg transition">
-                            <i data-lucide="trash-2" class="w-4 h-4"></i>
+                        <span class="text-sm text-gray-400">教育经历 #${index + 1}</span>
+                        <button type="button" onclick="removeEducation(${index})" class="text-red-400 hover:text-red-300">
+                            <i data-lucide="trash-2" class="w-5 h-5"></i>
                         </button>
                     </div>
                     <div class="grid md:grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-sm text-gray-400 mb-1">学校名称</label>
-                            <input type="text" class="edu-school w-full bg-gray-700 border border-gray-600 rounded-lg px-3 py-2 text-white focus:border-green-500 focus:outline-none transition" value="${edu.school || ''}">
+                            <label class="block text-sm text-gray-400 mb-2">学位</label>
+                            <input type="text" class="edu-degree w-full bg-dark-700 border border-dark-600 rounded-lg px-4 py-3 text-white focus:border-orange-500 focus:outline-none transition-colors" value="${edu.degree || ''}" data-index="${index}">
                         </div>
                         <div>
-                            <label class="block text-sm text-gray-400 mb-1">学位</label>
-                            <input type="text" class="edu-degree w-full bg-gray-700 border border-gray-600 rounded-lg px-3 py-2 text-white focus:border-green-500 focus:outline-none transition" value="${edu.degree || ''}">
+                            <label class="block text-sm text-gray-400 mb-2">学校</label>
+                            <input type="text" class="edu-school w-full bg-dark-700 border border-dark-600 rounded-lg px-4 py-3 text-white focus:border-orange-500 focus:outline-none transition-colors" value="${edu.school || ''}" data-index="${index}">
                         </div>
                         <div>
-                            <label class="block text-sm text-gray-400 mb-1">开始日期</label>
-                            <input type="text" class="edu-start w-full bg-gray-700 border border-gray-600 rounded-lg px-3 py-2 text-white focus:border-green-500 focus:outline-none transition" placeholder="2024-09" value="${edu.startDate || ''}">
+                            <label class="block text-sm text-gray-400 mb-2">开始时间</label>
+                            <input type="text" class="edu-start w-full bg-dark-700 border border-dark-600 rounded-lg px-4 py-3 text-white focus:border-orange-500 focus:outline-none transition-colors" value="${edu.startDate || ''}" data-index="${index}">
                         </div>
                         <div>
-                            <label class="block text-sm text-gray-400 mb-1">结束日期</label>
-                            <input type="text" class="edu-end w-full bg-gray-700 border border-gray-600 rounded-lg px-3 py-2 text-white focus:border-green-500 focus:outline-none transition" value="${edu.endDate || ''}">
+                            <label class="block text-sm text-gray-400 mb-2">结束时间</label>
+                            <input type="text" class="edu-end w-full bg-dark-700 border border-dark-600 rounded-lg px-4 py-3 text-white focus:border-orange-500 focus:outline-none transition-colors" value="${edu.endDate || ''}" data-index="${index}">
                         </div>
-                    </div>
-                    <div class="mt-4">
-                        <label class="block text-sm text-gray-400 mb-1">描述</label>
-                        <textarea class="edu-description w-full bg-gray-700 border border-gray-600 rounded-lg px-3 py-2 text-white focus:border-green-500 focus:outline-none transition resize-none" rows="2">${edu.description || ''}</textarea>
+                        <div class="md:col-span-2">
+                            <label class="block text-sm text-gray-400 mb-2">描述</label>
+                            <textarea class="edu-desc w-full bg-dark-700 border border-dark-600 rounded-lg px-4 py-3 text-white focus:border-orange-500 focus:outline-none transition-colors resize-none" rows="3" data-index="${index}">${edu.description || ''}</textarea>
+                        </div>
                     </div>
                 </div>
             `).join('');
             lucide.createIcons();
         }
-
-        function setupEventListeners() {
-            document.getElementById('logoutBtn').addEventListener('click', () => {
-                Auth.logout();
-                window.location.href = 'login.html';
-            });
-
-            // 添加技能
-            document.getElementById('addSkillBtn').addEventListener('click', () => {
-                const skills = getSkillsFromForm();
-                skills.push({ name: '', level: 50 });
-                renderSkills(skills);
-            });
-
-            // 删除技能
-            document.getElementById('skillsContainer').addEventListener('click', (e) => {
-                const removeBtn = e.target.closest('.remove-skill');
-                if (removeBtn) {
-                    const container = removeBtn.closest('[data-skill-index]');
-                    const index = parseInt(container.dataset.skillIndex);
-                    const skills = getSkillsFromForm();
-                    skills.splice(index, 1);
-                    renderSkills(skills);
-                }
-            });
-
-            // 添加经历
-            document.getElementById('addExperienceBtn').addEventListener('click', () => {
-                const experiences = getExperiencesFromForm();
-                experiences.push({ company: '', position: '', startDate: '', endDate: '', description: '' });
-                renderExperiences(experiences);
-            });
-
-            // 删除经历
-            document.getElementById('experiencesContainer').addEventListener('click', (e) => {
-                const removeBtn = e.target.closest('.remove-experience');
-                if (removeBtn) {
-                    const container = removeBtn.closest('[data-exp-index]');
-                    const index = parseInt(container.dataset.expIndex);
-                    const experiences = getExperiencesFromForm();
-                    experiences.splice(index, 1);
-                    renderExperiences(experiences);
-                }
-            });
-
-            // 添加教育
-            document.getElementById('addEducationBtn').addEventListener('click', () => {
-                const education = getEducationFromForm();
-                education.push({ school: '', degree: '', startDate: '', endDate: '', description: '' });
-                renderEducation(education);
-            });
-
-            // 删除教育
-            document.getElementById('educationContainer').addEventListener('click', (e) => {
-                const removeBtn = e.target.closest('.remove-education');
-                if (removeBtn) {
-                    const container = removeBtn.closest('[data-edu-index]');
-                    const index = parseInt(container.dataset.eduIndex);
-                    const education = getEducationFromForm();
-                    education.splice(index, 1);
-                    renderEducation(education);
-                }
-            });
-
-            // 保存表单
-            document.getElementById('settingsForm').addEventListener('submit', (e) => {
-                e.preventDefault();
-                saveConfig();
-            });
+        function addEducation() {
+            educationList.push({ degree: '', school: '', startDate: '', endDate: '', description: '' });
+            renderEducation();
         }
-
-        function getSkillsFromForm() {
-            const containers = document.querySelectorAll('[data-skill-index]');
-            return Array.from(containers).map(container => ({
-                name: container.querySelector('.skill-name').value,
-                level: parseInt(container.querySelector('.skill-level').value) || 0
-            }));
-        }
-
-        function getExperiencesFromForm() {
-            const containers = document.querySelectorAll('[data-exp-index]');
-            return Array.from(containers).map(container => ({
-                company: container.querySelector('.exp-company').value,
-                position: container.querySelector('.exp-position').value,
-                startDate: container.querySelector('.exp-start').value,
-                endDate: container.querySelector('.exp-end').value,
-                description: container.querySelector('.exp-description').value
-            }));
-        }
-
-        function getEducationFromForm() {
-            const containers = document.querySelectorAll('[data-edu-index]');
-            return Array.from(containers).map(container => ({
-                school: container.querySelector('.edu-school').value,
-                degree: container.querySelector('.edu-degree').value,
-                startDate: container.querySelector('.edu-start').value,
-                endDate: container.querySelector('.edu-end').value,
-                description: container.querySelector('.edu-description').value
-            }));
-        }
-
-        function saveConfig() {
+        window.removeEducation = function(index) {
+            educationList.splice(index, 1);
+            renderEducation();
+        };
+        function handleSave(e) {
+            e.preventDefault();
+            const updatedSkills = [];
+            document.querySelectorAll('.skill-name').forEach((input, i) => {
+                const levelInput = document.querySelectorAll('.skill-level')[i];
+                updatedSkills.push({
+                    name: input.value,
+                    level: parseInt(levelInput.value) || 0
+                });
+            });
+            const updatedExperiences = [];
+            document.querySelectorAll('.exp-position').forEach((input, i) => {
+                const company = document.querySelectorAll('.exp-company')[i].value;
+                const start = document.querySelectorAll('.exp-start')[i].value;
+                const end = document.querySelectorAll('.exp-end')[i].value;
+                const desc = document.querySelectorAll('.exp-desc')[i].value;
+                updatedExperiences.push({
+                    position: input.value,
+                    company: company,
+                    startDate: start,
+                    endDate: end,
+                    description: desc
+                });
+            });
+            const updatedEducation = [];
+            document.querySelectorAll('.edu-degree').forEach((input, i) => {
+                const school = document.querySelectorAll('.edu-school')[i].value;
+                const start = document.querySelectorAll('.edu-start')[i].value;
+                const end = document.querySelectorAll('.edu-end')[i].value;
+                const desc = document.querySelectorAll('.edu-desc')[i].value;
+                updatedEducation.push({
+                    degree: input.value,
+                    school: school,
+                    startDate: start,
+                    endDate: end,
+                    description: desc
+                });
+            });
             const config = {
-                ...currentConfig,
                 siteName: document.getElementById('siteName').value,
                 siteDescription: document.getElementById('siteDescription').value,
                 authorName: document.getElementById('authorName').value,
                 authorTitle: document.getElementById('authorTitle').value,
                 authorLocation: document.getElementById('authorLocation').value,
                 authorEmail: document.getElementById('authorEmail').value,
-                authorBio: document.getElementById('authorBio').value,
-                authorAvatar: document.getElementById('authorAvatar').value,
                 hero: {
                     title: document.getElementById('heroTitle').value,
                     subtitle: document.getElementById('heroSubtitle').value,
@@ -575,15 +459,14 @@
                     ctaText: document.getElementById('heroCtaText').value,
                     ctaLink: document.getElementById('heroCtaLink').value
                 },
-                skills: getSkillsFromForm(),
-                experiences: getExperiencesFromForm(),
-                education: getEducationFromForm(),
+                skills: updatedSkills,
+                experiences: updatedExperiences,
+                education: updatedEducation,
                 socialLinks: {
                     github: document.getElementById('socialGithub').value,
                     twitter: document.getElementById('socialTwitter').value,
                     linkedin: document.getElementById('socialLinkedin').value,
-                    weibo: document.getElementById('socialWeibo').value,
-                    zhihu: document.getElementById('socialZhihu').value
+                    weibo: document.getElementById('socialWeibo').value
                 },
                 seo: {
                     title: document.getElementById('seoTitle').value,
@@ -594,20 +477,10 @@
                     copyright: document.getElementById('footerCopyright').value
                 }
             };
-
-            const result = Data.updateSiteConfig(config);
-            if (result.success) {
-                currentConfig = result.config;
-                showSuccessMessage();
-            }
-        }
-
-        function showSuccessMessage() {
+            Data.saveSiteConfig(config);
             const msg = document.getElementById('successMessage');
             msg.classList.remove('hidden');
-            setTimeout(() => {
-                msg.classList.add('hidden');
-            }, 3000);
+            setTimeout(() => msg.classList.add('hidden'), 3000);
         }
     </script>
 </body>

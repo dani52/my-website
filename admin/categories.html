@@ -16,15 +16,15 @@
 <body class="text-gray-100 min-h-screen">
     <div class="flex h-screen">
         <aside class="w-64 bg-dark-800 border-r border-dark-700 flex flex-col">
-            <div class="p-6 border-b border-dark-700"><a href="../index.html" target="_blank" class="font-display text-xl font-bold gradient-text">Portfolio</a></div>
+            <div class="p-6 border-b border-dark-700"><a href="../index.html" target="_blank" class="font-display text-xl font-bold gradient-text">��̨����</a></div>
             <nav class="flex-1 p-4 space-y-2">
-                <a href="index.html" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:bg-dark-700 rounded-lg"><i data-lucide="layout-dashboard" class="w-5 h-5"></i><span>仪表盘</span></a>
+                <a href="index.html" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:bg-dark-700 rounded-lg"><i data-lucide="layout-dashboard" class="w-5 h-5"></i><span>仪表�?/span></a>
                 <a href="posts.html" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:bg-dark-700 rounded-lg"><i data-lucide="file-text" class="w-5 h-5"></i><span>文章管理</span></a>
                 <a href="projects.html" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:bg-dark-700 rounded-lg"><i data-lucide="folder" class="w-5 h-5"></i><span>项目管理</span></a>
                 <a href="categories.html" class="flex items-center gap-3 px-4 py-3 bg-blue-500/10 text-blue-400 rounded-lg"><i data-lucide="tags" class="w-5 h-5"></i><span>分类管理</span></a>
                 <a href="settings.html" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:bg-dark-700 rounded-lg"><i data-lucide="settings" class="w-5 h-5"></i><span>站点设置</span></a>
             </nav>
-            <div class="p-4 border-t border-dark-700"><button id="logoutBtn" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-red-400 w-full"><i data-lucide="log-out" class="w-5 h-5"></i><span>退出登录</span></button></div>
+            <div class="p-4 border-t border-dark-700"><button id="logoutBtn" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-red-400 w-full"><i data-lucide="log-out" class="w-5 h-5"></i><span>退出登�?/span></button></div>
         </aside>
         <main class="flex-1 overflow-auto">
             <header class="bg-dark-800/50 backdrop-blur-md border-b border-dark-700 sticky top-0 z-10">
@@ -87,7 +87,7 @@
         function closeModal() { document.getElementById('modal').classList.add('hidden'); }
         function editCategory(id) { const cat = Data.getCategoryById(id); if (cat) openModal(cat); }
         function saveCategory() { const id = document.getElementById('categoryId').value; const data = { name: document.getElementById('catName').value.trim(), slug: document.getElementById('catSlug').value.trim(), type: document.getElementById('catType').value, description: document.getElementById('catDesc').value.trim() }; if (!data.name || !data.slug) { Utils.showToast('请填写名称和链接', 'error'); return; } let result; if (id) result = Data.updateCategory(id, data); else result = Data.createCategory(data); if (result.success) { Utils.showToast('保存成功'); closeModal(); loadCategories(); } else Utils.showToast(result.message, 'error'); }
-        async function deleteCategory(id) { if (!await Utils.confirmDialog('确定要删除这个分类吗？')) return; const result = Data.deleteCategory(id); if (result.success) { Utils.showToast('删除成功'); loadCategories(); } else Utils.showToast(result.message, 'error'); }
+        async function deleteCategory(id) { if (!await Utils.confirmDialog('确定要删除这个分类吗�?)) return; const result = Data.deleteCategory(id); if (result.success) { Utils.showToast('删除成功'); loadCategories(); } else Utils.showToast(result.message, 'error'); }
     </script>
 </body>
 </html>
