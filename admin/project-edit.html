@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>编辑项目 - 后台管理</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>tailwind.config = { theme: { extend: { colors: { dark: { 900: '#0a0a0f', 800: '#1e293b', 700: '#334155' } } } } }</script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background: #0a0a0f; }
+        .font-display { font-family: 'Space Grotesk', sans-serif; }
+        .gradient-text { background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #06b6d4 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    </style>
+</head>
+<body class="text-gray-100 min-h-screen">
+    <div class="flex h-screen">
+        <aside class="w-64 bg-dark-800 border-r border-dark-700 flex flex-col">
+            <div class="p-6 border-b border-dark-700"><a href="../index.html" target="_blank" class="font-display text-xl font-bold gradient-text">Portfolio</a></div>
+            <nav class="flex-1 p-4 space-y-2">
+                <a href="index.html" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:bg-dark-700 rounded-lg"><i data-lucide="layout-dashboard" class="w-5 h-5"></i><span>仪表盘</span></a>
+                <a href="posts.html" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:bg-dark-700 rounded-lg"><i data-lucide="file-text" class="w-5 h-5"></i><span>文章管理</span></a>
+                <a href="projects.html" class="flex items-center gap-3 px-4 py-3 bg-blue-500/10 text-blue-400 rounded-lg"><i data-lucide="folder" class="w-5 h-5"></i><span>项目管理</span></a>
+                <a href="categories.html" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:bg-dark-700 rounded-lg"><i data-lucide="tags" class="w-5 h-5"></i><span>分类管理</span></a>
+                <a href="settings.html" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:bg-dark-700 rounded-lg"><i data-lucide="settings" class="w-5 h-5"></i><span>站点设置</span></a>
+            </nav>
+            <div class="p-4 border-t border-dark-700"><button id="logoutBtn" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-red-400 w-full"><i data-lucide="log-out" class="w-5 h-5"></i><span>退出登录</span></button></div>
+        </aside>
+        <main class="flex-1 overflow-auto">
+            <header class="bg-dark-800/50 backdrop-blur-md border-b border-dark-700 sticky top-0 z-10">
+                <div class="px-8 py-4 flex justify-between items-center">
+                    <div class="flex items-center gap-4"><a href="projects.html" class="text-gray-400 hover:text-white"><i data-lucide="arrow-left" class="w-5 h-5"></i></a><h1 id="pageTitle" class="font-display text-2xl font-bold">新建项目</h1></div>
+                    <button id="saveBtn" class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">保存</button>
+                </div>
+            </header>
+            <div class="p-8 max-w-4xl">
+                <form id="projectForm" class="space-y-6">
+                    <input type="hidden" id="projectId">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-400 mb-2">项目名称</label>
+                        <input type="text" id="title" required class="w-full px-4 py-3 bg-dark-800 border border-dark-700 rounded-lg text-white focus:outline-none focus:border-blue-500">
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-400 mb-2">URL 链接</label>
+                            <div class="flex items-center gap-2"><span class="text-gray-500">/</span><input type="text" id="slug" required class="flex-1 px-4 py-2 bg-dark-800 border border-dark-700 rounded-lg text-white focus:outline-none focus:border-blue-500"></div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-400 mb-2">分类</label>
+                            <select id="category" class="w-full px-4 py-2 bg-dark-800 border border-dark-700 rounded-lg text-white focus:outline-none focus:border-blue-500"><option value="">选择分类</option></select>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-400 mb-2">简短描述</label>
+                        <textarea id="description" rows="3" required class="w-full px-4 py-3 bg-dark-800 border border-dark-700 rounded-lg text-white focus:outline-none focus:border-blue-500 resize-none"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-400 mb-2">技术栈（用逗号分隔）</label>
+                        <input type="text" id="techStack" class="w-full px-4 py-2 bg-dark-800 border border-dark-700 rounded-lg text-white focus:outline-none focus:border-blue-500" placeholder="React, Node.js, PostgreSQL">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-400 mb-2">缩略图</label>
+                        <div class="flex items-center gap-4">
+                            <div id="thumbPreview" class="w-32 h-20 bg-dark-800 border border-dark-700 rounded-lg flex items-center justify-center overflow-hidden"><i data-lucide="image" class="w-8 h-8 text-gray-600"></i></div>
+                            <div><input type="file" id="thumbnail" accept="image/*" class="hidden"><button type="button" onclick="document.getElementById('thumbnail').click()" class="px-4 py-2 bg-dark-700 text-gray-300 rounded-lg">选择图片</button></div>
+                        </div>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-400 mb-2">演示链接</label>
+                            <input type="url" id="demoUrl" class="w-full px-4 py-2 bg-dark-800 border border-dark-700 rounded-lg text-white focus:outline-none focus:border-blue-500" placeholder="https://demo.com">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-400 mb-2">源码链接</label>
+                            <input type="url" id="repoUrl" class="w-full px-4 py-2 bg-dark-800 border border-dark-700 rounded-lg text-white focus:outline-none focus:border-blue-500" placeholder="https://github.com/...">
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <input type="checkbox" id="featured" class="w-5 h-5 rounded bg-dark-800 border-dark-700"><label for="featured" class="text-gray-400">设为精选项目</label>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+    <script src="../js/utils.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/data.js"></script>
+    <script>
+        let currentProject = null, thumbBase64 = '';
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+            Data.initDefaultData();
+            if (!Auth.protectRoute()) return;
+            loadCategories();
+            loadProject();
+            document.getElementById('title').addEventListener('blur', () => { if (!document.getElementById('slug').value && document.getElementById('title').value) document.getElementById('slug').value = Utils.slugify(document.getElementById('title').value); });
+            document.getElementById('thumbnail').addEventListener('change', async (e) => { const file = e.target.files[0]; if (file) { thumbBase64 = await Utils.compressImage(await Utils.fileToBase64(file), 800); document.getElementById('thumbPreview').innerHTML = `<img src="${thumbBase64}" class="w-full h-full object-cover">`; } });
+            document.getElementById('saveBtn').addEventListener('click', saveProject);
+            document.getElementById('logoutBtn').addEventListener('click', () => { Auth.logout(); window.location.href = 'login.html'; });
+        });
+        function loadCategories() { const cats = Data.getCategories('project'); document.getElementById('category').innerHTML = '<option value="">选择分类</option>' + cats.map(c => `<option value="${c.id}">${c.name}</option>`).join(''); }
+        function loadProject() { const urlParams = new URLSearchParams(window.location.search); const id = urlParams.get('id'); if (!id) return; currentProject = Data.getProjectById(id); if (!currentProject) return; document.getElementById('pageTitle').textContent = '编辑项目'; document.getElementById('projectId').value = currentProject.id; document.getElementById('title').value = currentProject.title; document.getElementById('slug').value = currentProject.slug; document.getElementById('description').value = currentProject.description; document.getElementById('techStack').value = currentProject.techStack.join(', '); document.getElementById('category').value = currentProject.categoryId || ''; document.getElementById('demoUrl').value = currentProject.demoUrl || ''; document.getElementById('repoUrl').value = currentProject.repoUrl || ''; document.getElementById('featured').checked = currentProject.featured; if (currentProject.thumbnail) { thumbBase64 = currentProject.thumbnail; document.getElementById('thumbPreview').innerHTML = `<img src="${thumbBase64}" class="w-full h-full object-cover">`; } }
+        function saveProject() { const title = document.getElementById('title').value.trim(); const slug = document.getElementById('slug').value.trim(); const description = document.getElementById('description').value.trim(); if (!title || !slug || !description) { Utils.showToast('请填写完整信息', 'error'); return; } const data = { title, slug, description, techStack: document.getElementById('techStack').value.split(',').map(t => t.trim()).filter(Boolean), categoryId: document.getElementById('category').value || null, demoUrl: document.getElementById('demoUrl').value, repoUrl: document.getElementById('repoUrl').value, featured: document.getElementById('featured').checked, thumbnail: thumbBase64, images: [] }; let result; if (currentProject) result = Data.updateProject(currentProject.id, data); else result = Data.createProject(data); if (result.success) { Utils.showToast('保存成功'); setTimeout(() => window.location.href = 'projects.html', 500); } else Utils.showToast(result.message, 'error'); }
+    </script>
+</body>
+</html>

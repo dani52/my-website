@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的个人网站</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="css/custom.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        dark: {
+                            900: '#0a0a0f',
+                            800: '#1e293b',
+                            700: '#334155',
+                            600: '#475569',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0a0f;
+        }
+        
+        .font-display {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #06b6d4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .glow {
+            box-shadow: 0 0 40px rgba(59, 130, 246, 0.3);
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.2);
+        }
+        
+        .animate-fade-in-up {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .bg-grid {
+            background-image: 
+                linear-gradient(rgba(59, 130, 246, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(59, 130, 246, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+    </style>
+</head>
+<body class="text-gray-100 min-h-screen">
+    <!-- 导航栏 -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-dark-900/80 backdrop-blur-md border-b border-dark-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <a href="index.html" class="font-display text-xl font-bold gradient-text">
+                    Portfolio
+                </a>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-blue-400 font-medium">首页</a>
+                    <a href="projects.html" class="text-gray-400 hover:text-white transition-colors">作品集</a>
+                    <a href="blog.html" class="text-gray-400 hover:text-white transition-colors">博客</a>
+                    <a href="about.html" class="text-gray-400 hover:text-white transition-colors">关于我</a>
+                </div>
+                <button id="mobileMenuBtn" class="md:hidden text-gray-400 hover:text-white">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+        <!-- 移动端菜单 -->
+        <div id="mobileMenu" class="hidden md:hidden bg-dark-800 border-t border-dark-700">
+            <div class="px-4 py-3 space-y-2">
+                <a href="index.html" class="block py-2 text-blue-400 font-medium">首页</a>
+                <a href="projects.html" class="block py-2 text-gray-400 hover:text-white">作品集</a>
+                <a href="blog.html" class="block py-2 text-gray-400 hover:text-white">博客</a>
+                <a href="about.html" class="block py-2 text-gray-400 hover:text-white">关于我</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero 区域 -->
+    <section class="relative min-h-screen flex items-center justify-center bg-grid pt-16">
+        <div class="absolute inset-0 bg-gradient-to-b from-blue-500/5 via-transparent to-purple-500/5"></div>
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
+            <div class="animate-fade-in-up" data-animate>
+                <div class="w-32 h-32 mx-auto mb-8 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 p-1 glow">
+                    <div class="w-full h-full rounded-full bg-dark-800 flex items-center justify-center overflow-hidden">
+                        <i data-lucide="user" class="w-16 h-16 text-gray-400"></i>
+                    </div>
+                </div>
+                <h1 class="font-display text-5xl md:text-7xl font-bold mb-6">
+                    <span class="gradient-text">你好，我是</span>
+                    <span id="authorName" class="text-white">开发者</span>
+                </h1>
+                <p id="authorBio" class="text-xl text-gray-400 max-w-2xl mx-auto mb-10">
+                    全栈开发者，热爱技术和设计，专注于创造优秀的用户体验
+                </p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="projects.html" class="px-8 py-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full font-medium hover:shadow-lg hover:shadow-blue-500/30 transition-all transform hover:scale-105">
+                        查看作品
+                    </a>
+                    <a href="blog.html" class="px-8 py-3 border border-dark-600 rounded-full font-medium hover:bg-dark-800 transition-all">
+                        阅读博客
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 精选项目 -->
+    <section class="py-20 bg-dark-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16" data-animate>
+                <h2 class="font-display text-3xl md:text-4xl font-bold mb-4">精选项目</h2>
+                <p class="text-gray-400">我的一些代表性作品</p>
+            </div>
+            <div id="featuredProjects" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- 项目卡片将通过 JS 动态生成 -->
+            </div>
+            <div class="text-center mt-12">
+                <a href="projects.html" class="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors">
+                    查看全部作品
+                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 最新文章 -->
+    <section class="py-20 bg-dark-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16" data-animate>
+                <h2 class="font-display text-3xl md:text-4xl font-bold mb-4">最新文章</h2>
+                <p class="text-gray-400">分享技术和思考</p>
+            </div>
+            <div id="latestPosts" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- 文章卡片将通过 JS 动态生成 -->
+            </div>
+            <div class="text-center mt-12">
+                <a href="blog.html" class="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors">
+                    查看全部文章
+                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 技能展示 -->
+    <section class="py-20 bg-dark-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16" data-animate>
+                <h2 class="font-display text-3xl md:text-4xl font-bold mb-4">技术栈</h2>
+                <p class="text-gray-400">我使用的技术和工具</p>
+            </div>
+            <div class="flex flex-wrap justify-center gap-4" data-animate>
+                <span class="px-4 py-2 bg-dark-800 rounded-full text-gray-300 border border-dark-700">JavaScript</span>
+                <span class="px-4 py-2 bg-dark-800 rounded-full text-gray-300 border border-dark-700">TypeScript</span>
+                <span class="px-4 py-2 bg-dark-800 rounded-full text-gray-300 border border-dark-700">React</span>
+                <span class="px-4 py-2 bg-dark-800 rounded-full text-gray-300 border border-dark-700">Vue.js</span>
+                <span class="px-4 py-2 bg-dark-800 rounded-full text-gray-300 border border-dark-700">Node.js</span>
+                <span class="px-4 py-2 bg-dark-800 rounded-full text-gray-300 border border-dark-700">Python</span>
+                <span class="px-4 py-2 bg-dark-800 rounded-full text-gray-300 border border-dark-700">Tailwind CSS</span>
+                <span class="px-4 py-2 bg-dark-800 rounded-full text-gray-300 border border-dark-700">PostgreSQL</span>
+                <span class="px-4 py-2 bg-dark-800 rounded-full text-gray-300 border border-dark-700">Docker</span>
+                <span class="px-4 py-2 bg-dark-800 rounded-full text-gray-300 border border-dark-700">Git</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系方式 -->
+    <section class="py-20 bg-dark-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div data-animate>
+                <h2 class="font-display text-3xl md:text-4xl font-bold mb-4">联系我</h2>
+                <p class="text-gray-400 mb-8">有项目想法或想要交流？随时联系我</p>
+                <div class="flex justify-center gap-6">
+                    <a id="githubLink" href="#" target="_blank" class="w-12 h-12 bg-dark-700 rounded-full flex items-center justify-center hover:bg-blue-500 transition-colors">
+                        <i data-lucide="github" class="w-5 h-5"></i>
+                    </a>
+                    <a id="twitterLink" href="#" target="_blank" class="w-12 h-12 bg-dark-700 rounded-full flex items-center justify-center hover:bg-blue-400 transition-colors">
+                        <i data-lucide="twitter" class="w-5 h-5"></i>
+                    </a>
+                    <a id="linkedinLink" href="#" target="_blank" class="w-12 h-12 bg-dark-700 rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors">
+                        <i data-lucide="linkedin" class="w-5 h-5"></i>
+                    </a>
+                    <a id="emailLink" href="mailto:" class="w-12 h-12 bg-dark-700 rounded-full flex items-center justify-center hover:bg-green-500 transition-colors">
+                        <i data-lucide="mail" class="w-5 h-5"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="bg-dark-900 border-t border-dark-700 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500 text-sm">
+                    &copy; 2025 <span id="footerSiteName">我的个人网站</span>. All rights reserved.
+                </p>
+                <div class="flex items-center gap-4 mt-4 md:mt-0">
+                    <a href="admin/login.html" class="text-gray-500 hover:text-gray-400 text-sm">
+                        后台管理
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 脚本 -->
+    <script src="js/utils.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/data.js"></script>
+    <script>
+        // 初始化
+        document.addEventListener('DOMContentLoaded', async () => {
+            lucide.createIcons();
+            
+            // 初始化默认数据
+            Data.initDefaultData();
+            await Auth.initDefaultUser();
+            
+            // 加载站点配置
+            loadSiteConfig();
+            
+            // 加载精选项目
+            loadFeaturedProjects();
+            
+            // 加载最新文章
+            loadLatestPosts();
+            
+            // 初始化动画
+            Utils.initPageAnimations();
+            
+            // 移动端菜单
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        });
+        
+        // 加载站点配置
+        function loadSiteConfig() {
+            const config = Data.getSiteConfig();
+            if (config) {
+                document.getElementById('authorName').textContent = config.authorName || '开发者';
+                document.getElementById('authorBio').textContent = config.authorBio || '全栈开发者，热爱技术和设计';
+                document.getElementById('footerSiteName').textContent = config.siteName || '我的个人网站';
+                
+                // 社交链接
+                if (config.socialLinks) {
+                    if (config.socialLinks.github) {
+                        document.getElementById('githubLink').href = config.socialLinks.github;
+                    }
+                    if (config.socialLinks.twitter) {
+                        document.getElementById('twitterLink').href = config.socialLinks.twitter;
+                    }
+                    if (config.socialLinks.linkedin) {
+                        document.getElementById('linkedinLink').href = config.socialLinks.linkedin;
+                    }
+                    if (config.socialLinks.email) {
+                        document.getElementById('emailLink').href = `mailto:${config.socialLinks.email}`;
+                    }
+                }
+            }
+        }
+        
+        // 加载精选项目
+        function loadFeaturedProjects() {
+            const projects = Data.getProjects({ featured: true }).slice(0, 3);
+            const container = document.getElementById('featuredProjects');
+            
+            if (projects.length === 0) {
+                container.innerHTML = `
+                    <div class="col-span-full text-center py-12 text-gray-500">
+                        <i data-lucide="folder-open" class="w-12 h-12 mx-auto mb-4 opacity-50"></i>
+                        <p>暂无精选项目</p>
+                    </div>
+                `;
+                lucide.createIcons();
+                return;
+            }
+            
+            container.innerHTML = projects.map(project => `
+                <a href="project-detail.html?slug=${project.slug}" class="group block bg-dark-800 rounded-2xl overflow-hidden card-hover border border-dark-700" data-animate>
+                    <div class="aspect-video bg-dark-700 overflow-hidden">
+                        ${project.thumbnail ? 
+                            `<img src="${project.thumbnail}" alt="${project.title}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">` :
+                            `<div class="w-full h-full flex items-center justify-center">
+                                <i data-lucide="image" class="w-12 h-12 text-gray-600"></i>
+                            </div>`
+                        }
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-display text-xl font-semibold mb-2 group-hover:text-blue-400 transition-colors">${project.title}</h3>
+                        <p class="text-gray-400 text-sm mb-4 line-clamp-2">${project.description}</p>
+                        <div class="flex flex-wrap gap-2">
+                            ${project.techStack.slice(0, 3).map(tech => `
+                                <span class="px-2 py-1 bg-dark-700 rounded text-xs text-gray-300">${tech}</span>
+                            `).join('')}
+                        </div>
+                    </div>
+                </a>
+            `).join('');
+            
+            lucide.createIcons();
+        }
+        
+        // 加载最新文章
+        function loadLatestPosts() {
+            const { posts } = Data.getPosts({ published: true });
+            const latestPosts = posts.slice(0, 3);
+            const container = document.getElementById('latestPosts');
+            
+            if (latestPosts.length === 0) {
+                container.innerHTML = `
+                    <div class="col-span-full text-center py-12 text-gray-500">
+                        <i data-lucide="file-text" class="w-12 h-12 mx-auto mb-4 opacity-50"></i>
+                        <p>暂无文章</p>
+                    </div>
+                `;
+                lucide.createIcons();
+                return;
+            }
+            
+            container.innerHTML = latestPosts.map(post => `
+                <a href="blog-post.html?slug=${post.slug}" class="group block bg-dark-900 rounded-2xl overflow-hidden card-hover border border-dark-700" data-animate>
+                    <div class="aspect-video bg-dark-800 overflow-hidden">
+                        ${post.coverImage ? 
+                            `<img src="${post.coverImage}" alt="${post.title}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">` :
+                            `<div class="w-full h-full flex items-center justify-center">
+                                <i data-lucide="file-text" class="w-12 h-12 text-gray-600"></i>
+                            </div>`
+                        }
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-4 text-sm text-gray-500 mb-3">
+                            <span>${Utils.formatDate(post.createdAt)}</span>
+                            <span>${Utils.calculateReadingTime(post.content)} 分钟阅读</span>
+                        </div>
+                        <h3 class="font-display text-xl font-semibold mb-2 group-hover:text-blue-400 transition-colors">${post.title}</h3>
+                        <p class="text-gray-400 text-sm line-clamp-2">${post.excerpt || post.content.substring(0, 100)}...</p>
+                    </div>
+                </a>
+            `).join('');
+            
+            lucide.createIcons();
+        }
+    </script>
+</body>
+</html>

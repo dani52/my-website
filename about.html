@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>关于我 - 我的个人网站</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        dark: { 900: '#0a0a0f', 800: '#1e293b', 700: '#334155', 600: '#475569' }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; background: #0a0a0f; }
+        .font-display { font-family: 'Space Grotesk', sans-serif; }
+        .gradient-text { background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #06b6d4 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .timeline-item { position: relative; padding-left: 2rem; }
+        .timeline-item::before { content: ''; position: absolute; left: 0; top: 0.5rem; width: 0.75rem; height: 0.75rem; background: #3b82f6; border-radius: 50%; }
+        .timeline-item::after { content: ''; position: absolute; left: 0.375rem; top: 1.5rem; width: 2px; height: calc(100% - 1rem); background: #334155; }
+        .timeline-item:last-child::after { display: none; }
+    </style>
+</head>
+<body class="text-gray-100 min-h-screen">
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-dark-900/80 backdrop-blur-md border-b border-dark-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <a href="index.html" class="font-display text-xl font-bold gradient-text">Portfolio</a>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-gray-400 hover:text-white transition-colors">首页</a>
+                    <a href="projects.html" class="text-gray-400 hover:text-white transition-colors">作品集</a>
+                    <a href="blog.html" class="text-gray-400 hover:text-white transition-colors">博客</a>
+                    <a href="about.html" class="text-blue-400 font-medium">关于我</a>
+                </div>
+                <button id="mobileMenuBtn" class="md:hidden text-gray-400 hover:text-white"><i data-lucide="menu" class="w-6 h-6"></i></button>
+            </div>
+        </div>
+        <div id="mobileMenu" class="hidden md:hidden bg-dark-800 border-t border-dark-700">
+            <div class="px-4 py-3 space-y-2">
+                <a href="index.html" class="block py-2 text-gray-400 hover:text-white">首页</a>
+                <a href="projects.html" class="block py-2 text-gray-400 hover:text-white">作品集</a>
+                <a href="blog.html" class="block py-2 text-gray-400 hover:text-white">博客</a>
+                <a href="about.html" class="block py-2 text-blue-400 font-medium">关于我</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="pt-32 pb-20">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <div class="w-32 h-32 mx-auto mb-6 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 p-1">
+                    <div class="w-full h-full rounded-full bg-dark-800 flex items-center justify-center overflow-hidden">
+                        <i data-lucide="user" class="w-16 h-16 text-gray-400"></i>
+                    </div>
+                </div>
+                <h1 id="authorName" class="font-display text-4xl font-bold mb-4">你的名字</h1>
+                <p id="authorBio" class="text-xl text-gray-400 max-w-2xl mx-auto">全栈开发者，热爱技术和设计</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12 mb-16">
+                <div>
+                    <h2 class="font-display text-2xl font-bold mb-6">关于我</h2>
+                    <p id="aboutContent" class="text-gray-400 leading-relaxed">
+                        我是一名充满热情的全栈开发者，专注于创建优雅、高效的 Web 应用程序。
+                        我相信好的代码不仅要能工作，还要易于维护和理解。
+                        在工作之余，我喜欢探索新技术，撰写技术博客，参与开源项目。
+                    </p>
+                </div>
+                <div>
+                    <h2 class="font-display text-2xl font-bold mb-6">技能</h2>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-1"><span class="text-gray-300">JavaScript / TypeScript</span><span class="text-gray-500">95%</span></div>
+                            <div class="h-2 bg-dark-700 rounded-full"><div class="h-full bg-gradient-to-r from-blue-500 to-purple-500 rounded-full" style="width: 95%"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1"><span class="text-gray-300">React / Vue</span><span class="text-gray-500">90%</span></div>
+                            <div class="h-2 bg-dark-700 rounded-full"><div class="h-full bg-gradient-to-r from-blue-500 to-purple-500 rounded-full" style="width: 90%"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1"><span class="text-gray-300">Node.js</span><span class="text-gray-500">85%</span></div>
+                            <div class="h-2 bg-dark-700 rounded-full"><div class="h-full bg-gradient-to-r from-blue-500 to-purple-500 rounded-full" style="width: 85%"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1"><span class="text-gray-300">Python</span><span class="text-gray-500">80%</span></div>
+                            <div class="h-2 bg-dark-700 rounded-full"><div class="h-full bg-gradient-to-r from-blue-500 to-purple-500 rounded-full" style="width: 80%"></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-16">
+                <h2 class="font-display text-2xl font-bold mb-8">工作经历</h2>
+                <div class="space-y-8">
+                    <div class="timeline-item">
+                        <h3 class="text-lg font-semibold text-white">高级前端工程师</h3>
+                        <p class="text-blue-400 mb-2">某科技公司 · 2022 - 至今</p>
+                        <p class="text-gray-400">负责公司核心产品的前端架构设计和开发，带领团队完成多个重要项目。</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h3 class="text-lg font-semibold text-white">全栈开发工程师</h3>
+                        <p class="text-blue-400 mb-2">某互联网公司 · 2019 - 2022</p>
+                        <p class="text-gray-400">参与多个 Web 应用的全栈开发，包括前端界面、后端 API 和数据库设计。</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h3 class="text-lg font-semibold text-white">初级开发工程师</h3>
+                        <p class="text-blue-400 mb-2">某创业公司 · 2017 - 2019</p>
+                        <p class="text-gray-400">负责网站开发和维护，学习并掌握了多种前端技术。</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <h2 class="font-display text-2xl font-bold mb-6">联系我</h2>
+                <div class="flex justify-center gap-6">
+                    <a id="githubLink" href="#" target="_blank" class="w-12 h-12 bg-dark-800 rounded-full flex items-center justify-center hover:bg-blue-500 transition-colors"><i data-lucide="github" class="w-5 h-5"></i></a>
+                    <a id="twitterLink" href="#" target="_blank" class="w-12 h-12 bg-dark-800 rounded-full flex items-center justify-center hover:bg-blue-400 transition-colors"><i data-lucide="twitter" class="w-5 h-5"></i></a>
+                    <a id="linkedinLink" href="#" target="_blank" class="w-12 h-12 bg-dark-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
+                    <a id="emailLink" href="mailto:" class="w-12 h-12 bg-dark-800 rounded-full flex items-center justify-center hover:bg-green-500 transition-colors"><i data-lucide="mail" class="w-5 h-5"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-dark-900 border-t border-dark-700 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-gray-500 text-sm">&copy; 2025 我的个人网站. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/utils.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/data.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+            Data.initDefaultData();
+            loadSiteConfig();
+            document.getElementById('mobileMenuBtn').addEventListener('click', () => {
+                document.getElementById('mobileMenu').classList.toggle('hidden');
+            });
+        });
+
+        function loadSiteConfig() {
+            const config = Data.getSiteConfig();
+            if (config) {
+                document.getElementById('authorName').textContent = config.authorName || '你的名字';
+                document.getElementById('authorBio').textContent = config.authorBio || '全栈开发者，热爱技术和设计';
+                if (config.socialLinks) {
+                    if (config.socialLinks.github) document.getElementById('githubLink').href = config.socialLinks.github;
+                    if (config.socialLinks.twitter) document.getElementById('twitterLink').href = config.socialLinks.twitter;
+                    if (config.socialLinks.linkedin) document.getElementById('linkedinLink').href = config.socialLinks.linkedin;
+                    if (config.socialLinks.email) document.getElementById('emailLink').href = `mailto:${config.socialLinks.email}`;
+                }
+            }
+        }
+    </script>
+</body>
+</html>

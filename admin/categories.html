@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>分类管理 - 后台管理</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>tailwind.config = { theme: { extend: { colors: { dark: { 900: '#0a0a0f', 800: '#1e293b', 700: '#334155' } } } } }</script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background: #0a0a0f; }
+        .font-display { font-family: 'Space Grotesk', sans-serif; }
+        .gradient-text { background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #06b6d4 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    </style>
+</head>
+<body class="text-gray-100 min-h-screen">
+    <div class="flex h-screen">
+        <aside class="w-64 bg-dark-800 border-r border-dark-700 flex flex-col">
+            <div class="p-6 border-b border-dark-700"><a href="../index.html" target="_blank" class="font-display text-xl font-bold gradient-text">Portfolio</a></div>
+            <nav class="flex-1 p-4 space-y-2">
+                <a href="index.html" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:bg-dark-700 rounded-lg"><i data-lucide="layout-dashboard" class="w-5 h-5"></i><span>仪表盘</span></a>
+                <a href="posts.html" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:bg-dark-700 rounded-lg"><i data-lucide="file-text" class="w-5 h-5"></i><span>文章管理</span></a>
+                <a href="projects.html" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:bg-dark-700 rounded-lg"><i data-lucide="folder" class="w-5 h-5"></i><span>项目管理</span></a>
+                <a href="categories.html" class="flex items-center gap-3 px-4 py-3 bg-blue-500/10 text-blue-400 rounded-lg"><i data-lucide="tags" class="w-5 h-5"></i><span>分类管理</span></a>
+                <a href="settings.html" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:bg-dark-700 rounded-lg"><i data-lucide="settings" class="w-5 h-5"></i><span>站点设置</span></a>
+            </nav>
+            <div class="p-4 border-t border-dark-700"><button id="logoutBtn" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-red-400 w-full"><i data-lucide="log-out" class="w-5 h-5"></i><span>退出登录</span></button></div>
+        </aside>
+        <main class="flex-1 overflow-auto">
+            <header class="bg-dark-800/50 backdrop-blur-md border-b border-dark-700 sticky top-0 z-10">
+                <div class="px-8 py-4 flex justify-between items-center">
+                    <h1 class="font-display text-2xl font-bold">分类管理</h1>
+                    <button id="addBtn" class="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"><i data-lucide="plus" class="w-4 h-4"></i><span>新建分类</span></button>
+                </div>
+            </header>
+            <div class="p-8">
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-dark-800 rounded-xl border border-dark-700">
+                        <div class="p-4 border-b border-dark-700"><h2 class="font-display text-lg font-semibold">文章分类</h2></div>
+                        <div id="postCategories" class="p-4 space-y-3"></div>
+                    </div>
+                    <div class="bg-dark-800 rounded-xl border border-dark-700">
+                        <div class="p-4 border-b border-dark-700"><h2 class="font-display text-lg font-semibold">项目分类</h2></div>
+                        <div id="projectCategories" class="p-4 space-y-3"></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <div id="modal" class="hidden fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+        <div class="bg-dark-800 rounded-xl p-6 w-full max-w-md border border-dark-700">
+            <h3 id="modalTitle" class="font-display text-xl font-bold mb-4">新建分类</h3>
+            <input type="hidden" id="categoryId">
+            <div class="space-y-4">
+                <div><label class="block text-sm text-gray-400 mb-1">名称</label><input type="text" id="catName" class="w-full px-4 py-2 bg-dark-900 border border-dark-700 rounded-lg text-white focus:outline-none focus:border-blue-500"></div>
+                <div><label class="block text-sm text-gray-400 mb-1">链接</label><input type="text" id="catSlug" class="w-full px-4 py-2 bg-dark-900 border border-dark-700 rounded-lg text-white focus:outline-none focus:border-blue-500"></div>
+                <div><label class="block text-sm text-gray-400 mb-1">类型</label><select id="catType" class="w-full px-4 py-2 bg-dark-900 border border-dark-700 rounded-lg text-white focus:outline-none focus:border-blue-500"><option value="post">文章</option><option value="project">项目</option></select></div>
+                <div><label class="block text-sm text-gray-400 mb-1">描述</label><textarea id="catDesc" rows="2" class="w-full px-4 py-2 bg-dark-900 border border-dark-700 rounded-lg text-white focus:outline-none focus:border-blue-500 resize-none"></textarea></div>
+            </div>
+            <div class="flex justify-end gap-3 mt-6">
+                <button onclick="closeModal()" class="px-4 py-2 bg-dark-700 text-gray-300 rounded-lg">取消</button>
+                <button onclick="saveCategory()" class="px-4 py-2 bg-blue-500 text-white rounded-lg">保存</button>
+            </div>
+        </div>
+    </div>
+    <script src="../js/utils.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/data.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+            Data.initDefaultData();
+            if (!Auth.protectRoute()) return;
+            loadCategories();
+            document.getElementById('logoutBtn').addEventListener('click', () => { Auth.logout(); window.location.href = 'login.html'; });
+            document.getElementById('addBtn').addEventListener('click', () => openModal());
+            document.getElementById('catName').addEventListener('blur', () => { if (!document.getElementById('catSlug').value) document.getElementById('catSlug').value = Utils.slugify(document.getElementById('catName').value); });
+        });
+        function loadCategories() {
+            const cats = Data.getCategories();
+            document.getElementById('postCategories').innerHTML = cats.filter(c => c.type === 'post').map(c => categoryItem(c)).join('') || '<p class="text-gray-500">暂无分类</p>';
+            document.getElementById('projectCategories').innerHTML = cats.filter(c => c.type === 'project').map(c => categoryItem(c)).join('') || '<p class="text-gray-500">暂无分类</p>';
+            lucide.createIcons();
+        }
+        function categoryItem(c) { return `<div class="flex items-center justify-between p-3 bg-dark-900 rounded-lg"><div><p class="font-medium">${c.name}</p><p class="text-sm text-gray-500">/${c.slug}</p></div><div class="flex gap-2"><button onclick="editCategory('${c.id}')" class="p-2 text-gray-400 hover:text-blue-400"><i data-lucide="edit" class="w-4 h-4"></i></button><button onclick="deleteCategory('${c.id}')" class="p-2 text-gray-400 hover:text-red-400"><i data-lucide="trash-2" class="w-4 h-4"></i></button></div></div>`; }
+        function openModal(cat = null) { document.getElementById('modal').classList.remove('hidden'); document.getElementById('modalTitle').textContent = cat ? '编辑分类' : '新建分类'; document.getElementById('categoryId').value = cat?.id || ''; document.getElementById('catName').value = cat?.name || ''; document.getElementById('catSlug').value = cat?.slug || ''; document.getElementById('catType').value = cat?.type || 'post'; document.getElementById('catDesc').value = cat?.description || ''; }
+        function closeModal() { document.getElementById('modal').classList.add('hidden'); }
+        function editCategory(id) { const cat = Data.getCategoryById(id); if (cat) openModal(cat); }
+        function saveCategory() { const id = document.getElementById('categoryId').value; const data = { name: document.getElementById('catName').value.trim(), slug: document.getElementById('catSlug').value.trim(), type: document.getElementById('catType').value, description: document.getElementById('catDesc').value.trim() }; if (!data.name || !data.slug) { Utils.showToast('请填写名称和链接', 'error'); return; } let result; if (id) result = Data.updateCategory(id, data); else result = Data.createCategory(data); if (result.success) { Utils.showToast('保存成功'); closeModal(); loadCategories(); } else Utils.showToast(result.message, 'error'); }
+        async function deleteCategory(id) { if (!await Utils.confirmDialog('确定要删除这个分类吗？')) return; const result = Data.deleteCategory(id); if (result.success) { Utils.showToast('删除成功'); loadCategories(); } else Utils.showToast(result.message, 'error'); }
+    </script>
+</body>
+</html>

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文章管理 - 后台管理</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        dark: { 900: '#0a0a0f', 800: '#1e293b', 700: '#334155', 600: '#475569' }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; background: #0a0a0f; }
+        .font-display { font-family: 'Space Grotesk', sans-serif; }
+        .gradient-text { background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #06b6d4 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    </style>
+</head>
+<body class="text-gray-100 min-h-screen">
+    <div class="flex h-screen">
+        <!-- 侧边栏 -->
+        <aside class="w-64 bg-dark-800 border-r border-dark-700 flex flex-col">
+            <div class="p-6 border-b border-dark-700">
+                <a href="../index.html" target="_blank" class="font-display text-xl font-bold gradient-text">Portfolio</a>
+            </div>
+            <nav class="flex-1 p-4 space-y-2">
+                <a href="index.html" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:bg-dark-700 hover:text-white rounded-lg transition-colors">
+                    <i data-lucide="layout-dashboard" class="w-5 h-5"></i>
+                    <span>仪表盘</span>
+                </a>
+                <a href="posts.html" class="flex items-center gap-3 px-4 py-3 bg-blue-500/10 text-blue-400 rounded-lg">
+                    <i data-lucide="file-text" class="w-5 h-5"></i>
+                    <span>文章管理</span>
+                </a>
+                <a href="projects.html" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:bg-dark-700 hover:text-white rounded-lg transition-colors">
+                    <i data-lucide="folder" class="w-5 h-5"></i>
+                    <span>项目管理</span>
+                </a>
+                <a href="categories.html" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:bg-dark-700 hover:text-white rounded-lg transition-colors">
+                    <i data-lucide="tags" class="w-5 h-5"></i>
+                    <span>分类管理</span>
+                </a>
+                <a href="settings.html" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:bg-dark-700 hover:text-white rounded-lg transition-colors">
+                    <i data-lucide="settings" class="w-5 h-5"></i>
+                    <span>站点设置</span>
+                </a>
+            </nav>
+            <div class="p-4 border-t border-dark-700">
+                <button id="logoutBtn" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-red-400 transition-colors w-full">
+                    <i data-lucide="log-out" class="w-5 h-5"></i>
+                    <span>退出登录</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- 主内容区 -->
+        <main class="flex-1 overflow-auto">
+            <header class="bg-dark-800/50 backdrop-blur-md border-b border-dark-700 sticky top-0 z-10">
+                <div class="px-8 py-4 flex justify-between items-center">
+                    <h1 class="font-display text-2xl font-bold">文章管理</h1>
+                    <a href="post-edit.html" class="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors">
+                        <i data-lucide="plus" class="w-4 h-4"></i>
+                        <span>新建文章</span>
+                    </a>
+                </div>
+            </header>
+
+            <div class="p-8">
+                <!-- 筛选器 -->
+                <div class="flex flex-wrap gap-4 mb-6">
+                    <div class="flex gap-2">
+                        <button class="filter-status px-4 py-2 rounded-lg text-sm font-medium transition-all bg-blue-500 text-white" data-status="all">全部</button>
+                        <button class="filter-status px-4 py-2 rounded-lg text-sm font-medium transition-all bg-dark-800 text-gray-400 hover:bg-dark-700" data-status="published">已发布</button>
+                        <button class="filter-status px-4 py-2 rounded-lg text-sm font-medium transition-all bg-dark-800 text-gray-400 hover:bg-dark-700" data-status="draft">草稿</button>
+                    </div>
+                    <div class="flex-1 max-w-md">
+                        <input type="text" id="searchInput" placeholder="搜索文章..." class="w-full px-4 py-2 bg-dark-800 border border-dark-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors">
+                    </div>
+                </div>
+
+                <!-- 文章列表 -->
+                <div class="bg-dark-800 rounded-xl border border-dark-700 overflow-hidden">
+                    <table class="w-full">
+                        <thead class="bg-dark-700/50">
+                            <tr>
+                                <th class="px-6 py-4 text-left text-sm font-medium text-gray-400">标题</th>
+                                <th class="px-6 py-4 text-left text-sm font-medium text-gray-400">分类</th>
+                                <th class="px-6 py-4 text-left text-sm font-medium text-gray-400">状态</th>
+                                <th class="px-6 py-4 text-left text-sm font-medium text-gray-400">日期</th>
+                                <th class="px-6 py-4 text-left text-sm font-medium text-gray-400">阅读</th>
+                                <th class="px-6 py-4 text-right text-sm font-medium text-gray-400">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="postsTableBody" class="divide-y divide-dark-700">
+                            <!-- 动态生成 -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- 分页 -->
+                <div id="pagination" class="flex justify-center gap-2 mt-6"></div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../js/utils.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/data.js"></script>
+    <script>
+        let currentPage = 1;
+        const postsPerPage = 10;
+        let currentStatus = 'all';
+        let searchQuery = '';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+            Data.initDefaultData();
+            
+            if (!Auth.protectRoute()) return;
+            
+            loadPosts();
+            
+            // 状态筛选
+            document.querySelectorAll('.filter-status').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.filter-status').forEach(b => {
+                        b.classList.remove('bg-blue-500', 'text-white');
+                        b.classList.add('bg-dark-800', 'text-gray-400');
+                    });
+                    btn.classList.remove('bg-dark-800', 'text-gray-400');
+                    btn.classList.add('bg-blue-500', 'text-white');
+                    currentStatus = btn.dataset.status;
+                    currentPage = 1;
+                    loadPosts();
+                });
+            });
+            
+            // 搜索
+            document.getElementById('searchInput').addEventListener('input', Utils.debounce((e) => {
+                searchQuery = e.target.value;
+                currentPage = 1;
+                loadPosts();
+            }, 300));
+            
+            // 退出登录
+            document.getElementById('logoutBtn').addEventListener('click', () => {
+                Auth.logout();
+                window.location.href = 'login.html';
+            });
+        });
+        
+        function loadPosts() {
+            const filters = { page: currentPage, limit: postsPerPage, search: searchQuery };
+            if (currentStatus !== 'all') filters.published = currentStatus === 'published';
+            
+            const result = Data.getPosts(filters);
+            const tbody = document.getElementById('postsTableBody');
+            const categories = Data.getCategories('post');
+            
+            if (result.posts.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6" class="px-6 py-12 text-center text-gray-500">暂无文章</td></tr>';
+                renderPagination(0);
+                return;
+            }
+            
+            tbody.innerHTML = result.posts.map(post => {
+                const categoryNames = post.categories.map(catId => {
+                    const cat = categories.find(c => c.id === catId);
+                    return cat ? cat.name : '';
+                }).filter(Boolean).join(', ') || '未分类';
+                
+                return `
+                    <tr class="hover:bg-dark-700/30 transition-colors">
+                        <td class="px-6 py-4">
+                            <div class="flex items-center gap-3">
+                                ${post.coverImage ? `<img src="${post.coverImage}" class="w-10 h-10 rounded-lg object-cover">` : `<div class="w-10 h-10 bg-dark-700 rounded-lg flex items-center justify-center"><i data-lucide="file-text" class="w-5 h-5 text-gray-500"></i></div>`}
+                                <div>
+                                    <p class="font-medium text-white">${post.title}</p>
+                                    <p class="text-sm text-gray-500">/${post.slug}</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4 text-gray-400">${categoryNames}</td>
+                        <td class="px-6 py-4">
+                            <span class="px-2 py-1 rounded-full text-xs ${post.published ? 'bg-green-500/10 text-green-400' : 'bg-yellow-500/10 text-yellow-400'}">
+                                ${post.published ? '已发布' : '草稿'}
+                            </span>
+                        </td>
+                        <td class="px-6 py-4 text-gray-400">${Utils.formatDate(post.createdAt)}</td>
+                        <td class="px-6 py-4 text-gray-400">${post.views || 0}</td>
+                        <td class="px-6 py-4 text-right">
+                            <div class="flex items-center justify-end gap-2">
+                                <a href="../blog-post.html?slug=${post.slug}" target="_blank" class="p-2 text-gray-400 hover:text-blue-400 transition-colors" title="预览">
+                                    <i data-lucide="eye" class="w-4 h-4"></i>
+                                </a>
+                                <a href="post-edit.html?id=${post.id}" class="p-2 text-gray-400 hover:text-blue-400 transition-colors" title="编辑">
+                                    <i data-lucide="edit" class="w-4 h-4"></i>
+                                </a>
+                                <button onclick="deletePost('${post.id}')" class="p-2 text-gray-400 hover:text-red-400 transition-colors" title="删除">
+                                    <i data-lucide="trash-2" class="w-4 h-4"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+            
+            lucide.createIcons();
+            renderPagination(result.totalPages);
+        }
+        
+        function renderPagination(totalPages) {
+            const container = document.getElementById('pagination');
+            if (totalPages <= 1) { container.innerHTML = ''; return; }
+            
+            let html = '';
+            for (let i = 1; i <= totalPages; i++) {
+                html += `<button class="px-4 py-2 rounded-lg ${i === currentPage ? 'bg-blue-500 text-white' : 'bg-dark-800 text-gray-400 hover:bg-dark-700'} transition-colors" onclick="goToPage(${i})">${i}</button>`;
+            }
+            container.innerHTML = html;
+        }
+        
+        function goToPage(page) {
+            currentPage = page;
+            loadPosts();
+        }
+        
+        async function deletePost(id) {
+            if (!await Utils.confirmDialog('确定要删除这篇文章吗？此操作不可恢复。')) return;
+            
+            const result = Data.deletePost(id);
+            if (result.success) {
+                Utils.showToast('文章已删除');
+                loadPosts();
+            } else {
+                Utils.showToast(result.message, 'error');
+            }
+        }
+    </script>
+</body>
+</html>

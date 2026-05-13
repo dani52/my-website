@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>站点设置 - 后台管理</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>tailwind.config = { theme: { extend: { colors: { dark: { 900: '#0a0a0f', 800: '#1e293b', 700: '#334155' } } } } }</script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background: #0a0a0f; }
+        .font-display { font-family: 'Space Grotesk', sans-serif; }
+        .gradient-text { background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #06b6d4 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    </style>
+</head>
+<body class="text-gray-100 min-h-screen">
+    <div class="flex h-screen">
+        <aside class="w-64 bg-dark-800 border-r border-dark-700 flex flex-col">
+            <div class="p-6 border-b border-dark-700"><a href="../index.html" target="_blank" class="font-display text-xl font-bold gradient-text">Portfolio</a></div>
+            <nav class="flex-1 p-4 space-y-2">
+                <a href="index.html" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:bg-dark-700 rounded-lg"><i data-lucide="layout-dashboard" class="w-5 h-5"></i><span>仪表盘</span></a>
+                <a href="posts.html" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:bg-dark-700 rounded-lg"><i data-lucide="file-text" class="w-5 h-5"></i><span>文章管理</span></a>
+                <a href="projects.html" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:bg-dark-700 rounded-lg"><i data-lucide="folder" class="w-5 h-5"></i><span>项目管理</span></a>
+                <a href="categories.html" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:bg-dark-700 rounded-lg"><i data-lucide="tags" class="w-5 h-5"></i><span>分类管理</span></a>
+                <a href="settings.html" class="flex items-center gap-3 px-4 py-3 bg-blue-500/10 text-blue-400 rounded-lg"><i data-lucide="settings" class="w-5 h-5"></i><span>站点设置</span></a>
+            </nav>
+            <div class="p-4 border-t border-dark-700"><button id="logoutBtn" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-red-400 w-full"><i data-lucide="log-out" class="w-5 h-5"></i><span>退出登录</span></button></div>
+        </aside>
+        <main class="flex-1 overflow-auto">
+            <header class="bg-dark-800/50 backdrop-blur-md border-b border-dark-700 sticky top-0 z-10">
+                <div class="px-8 py-4"><h1 class="font-display text-2xl font-bold">站点设置</h1></div>
+            </header>
+            <div class="p-8 max-w-2xl">
+                <form id="settingsForm" class="space-y-8">
+                    <div class="bg-dark-800 rounded-xl border border-dark-700 p-6">
+                        <h2 class="font-display text-lg font-semibold mb-4">基本信息</h2>
+                        <div class="space-y-4">
+                            <div><label class="block text-sm text-gray-400 mb-1">站点名称</label><input type="text" id="siteName" class="w-full px-4 py-2 bg-dark-900 border border-dark-700 rounded-lg text-white focus:outline-none focus:border-blue-500"></div>
+                            <div><label class="block text-sm text-gray-400 mb-1">站点描述</label><textarea id="siteDescription" rows="2" class="w-full px-4 py-2 bg-dark-900 border border-dark-700 rounded-lg text-white focus:outline-none focus:border-blue-500 resize-none"></textarea></div>
+                        </div>
+                    </div>
+                    <div class="bg-dark-800 rounded-xl border border-dark-700 p-6">
+                        <h2 class="font-display text-lg font-semibold mb-4">作者信息</h2>
+                        <div class="space-y-4">
+                            <div><label class="block text-sm text-gray-400 mb-1">作者名称</label><input type="text" id="authorName" class="w-full px-4 py-2 bg-dark-900 border border-dark-700 rounded-lg text-white focus:outline-none focus:border-blue-500"></div>
+                            <div><label class="block text-sm text-gray-400 mb-1">作者简介</label><textarea id="authorBio" rows="3" class="w-full px-4 py-2 bg-dark-900 border border-dark-700 rounded-lg text-white focus:outline-none focus:border-blue-500 resize-none"></textarea></div>
+                        </div>
+                    </div>
+                    <div class="bg-dark-800 rounded-xl border border-dark-700 p-6">
+                        <h2 class="font-display text-lg font-semibold mb-4">社交链接</h2>
+                        <div class="space-y-4">
+                            <div><label class="block text-sm text-gray-400 mb-1">GitHub</label><input type="url" id="github" class="w-full px-4 py-2 bg-dark-900 border border-dark-700 rounded-lg text-white focus:outline-none focus:border-blue-500" placeholder="https://github.com/username"></div>
+                            <div><label class="block text-sm text-gray-400 mb-1">Twitter</label><input type="url" id="twitter" class="w-full px-4 py-2 bg-dark-900 border border-dark-700 rounded-lg text-white focus:outline-none focus:border-blue-500" placeholder="https://twitter.com/username"></div>
+                            <div><label class="block text-sm text-gray-400 mb-1">LinkedIn</label><input type="url" id="linkedin" class="w-full px-4 py-2 bg-dark-900 border border-dark-700 rounded-lg text-white focus:outline-none focus:border-blue-500" placeholder="https://linkedin.com/in/username"></div>
+                            <div><label class="block text-sm text-gray-400 mb-1">邮箱</label><input type="email" id="email" class="w-full px-4 py-2 bg-dark-900 border border-dark-700 rounded-lg text-white focus:outline-none focus:border-blue-500" placeholder="your@email.com"></div>
+                        </div>
+                    </div>
+                    <div class="bg-dark-800 rounded-xl border border-dark-700 p-6">
+                        <h2 class="font-display text-lg font-semibold mb-4">SEO 设置</h2>
+                        <div class="space-y-4">
+                            <div><label class="block text-sm text-gray-400 mb-1">SEO 标题</label><input type="text" id="seoTitle" class="w-full px-4 py-2 bg-dark-900 border border-dark-700 rounded-lg text-white focus:outline-none focus:border-blue-500"></div>
+                            <div><label class="block text-sm text-gray-400 mb-1">SEO 描述</label><textarea id="seoDescription" rows="3" class="w-full px-4 py-2 bg-dark-900 border border-dark-700 rounded-lg text-white focus:outline-none focus:border-blue-500 resize-none"></textarea></div>
+                            <div><label class="block text-sm text-gray-400 mb-1">关键词</label><input type="text" id="seoKeywords" class="w-full px-4 py-2 bg-dark-900 border border-dark-700 rounded-lg text-white focus:outline-none focus:border-blue-500" placeholder="关键词1, 关键词2"></div>
+                        </div>
+                    </div>
+                    <button type="submit" class="w-full py-3 bg-blue-500 text-white rounded-lg font-medium hover:bg-blue-600 transition-colors">保存设置</button>
+                </form>
+            </div>
+        </main>
+    </div>
+    <script src="../js/utils.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/data.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+            Data.initDefaultData();
+            if (!Auth.protectRoute()) return;
+            loadSettings();
+            document.getElementById('settingsForm').addEventListener('submit', (e) => { e.preventDefault(); saveSettings(); });
+            document.getElementById('logoutBtn').addEventListener('click', () => { Auth.logout(); window.location.href = 'login.html'; });
+        });
+        function loadSettings() {
+            const config = Data.getSiteConfig();
+            document.getElementById('siteName').value = config.siteName || '';
+            document.getElementById('siteDescription').value = config.siteDescription || '';
+            document.getElementById('authorName').value = config.authorName || '';
+            document.getElementById('authorBio').value = config.authorBio || '';
+            document.getElementById('github').value = config.socialLinks?.github || '';
+            document.getElementById('twitter').value = config.socialLinks?.twitter || '';
+            document.getElementById('linkedin').value = config.socialLinks?.linkedin || '';
+            document.getElementById('email').value = config.socialLinks?.email || '';
+            document.getElementById('seoTitle').value = config.seo?.title || '';
+            document.getElementById('seoDescription').value = config.seo?.description || '';
+            document.getElementById('seoKeywords').value = config.seo?.keywords || '';
+        }
+        function saveSettings() {
+            const data = {
+                siteName: document.getElementById('siteName').value.trim(),
+                siteDescription: document.getElementById('siteDescription').value.trim(),
+                authorName: document.getElementById('authorName').value.trim(),
+                authorBio: document.getElementById('authorBio').value.trim(),
+                socialLinks: {
+                    github: document.getElementById('github').value.trim(),
+                    twitter: document.getElementById('twitter').value.trim(),
+                    linkedin: document.getElementById('linkedin').value.trim(),
+                    email: document.getElementById('email').value.trim()
+                },
+                seo: {
+                    title: document.getElementById('seoTitle').value.trim(),
+                    description: document.getElementById('seoDescription').value.trim(),
+                    keywords: document.getElementById('seoKeywords').value.trim()
+                }
+            };
+            Data.updateSiteConfig(data);
+            Utils.showToast('设置已保存');
+        }
+    </script>
+</body>
+</html>
